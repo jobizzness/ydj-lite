@@ -8,7 +8,9 @@
 |
 */
 
-
+Route::get('/', function(){
+   return "Woops!!";
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,8 @@
 |
 */
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::resource('user', 'UserController');
+
+    Route::resource('user', 'User\UserController');
 
 });
 

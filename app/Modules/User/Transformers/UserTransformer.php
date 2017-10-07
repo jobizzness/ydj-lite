@@ -38,7 +38,7 @@ class UserTransformer extends Transformer
     public function ifAdmin($adminResponse, $clientResponse)
     {
         $user = $this->user();
-        if (!is_null($user) && $user->hasAdminRole()) {
+        if (!is_null($user) && $user->hasRole('admin')) {
             return array_merge($clientResponse, $adminResponse);
         }
         return $clientResponse;
