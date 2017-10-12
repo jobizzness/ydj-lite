@@ -35,6 +35,7 @@ class UserController extends ApiController
         $this->transformer = $transformer;
         $this->request = $request;
     }
+
     /**
      * Return the currently logged in user
      * Array of the users Data
@@ -45,16 +46,4 @@ class UserController extends ApiController
         return $this->respond($this->transformer->transform($this->request->user()));
     }
 
-    /**
-     * Update the current user's info
-     *
-     * @param $id
-     * @return mixed
-     */
-    public function update($id)
-    {
-    }
-    public function store($id)
-    {
-    }
 }

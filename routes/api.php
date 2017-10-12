@@ -8,9 +8,7 @@
 |
 */
 
-Route::get('/', function(){
-   return "Woops!!";
-});
+Route::post('/auth/register', 'Auth\RegisterController@create');
 
 /*
 |--------------------------------------------------------------------------

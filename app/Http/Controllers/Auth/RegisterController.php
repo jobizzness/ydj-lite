@@ -2,70 +2,48 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\ApiController;
+use App\Modules\User\Commands\RegisterUserCommand;
+use App\Modules\User\Requests\RegisterUserRequest;
+use App\Modules\User\Transformers\UserTransformer;
 use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller
+
+class RegisterController extends ApiController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param UserTransformer $transformer
      */
-    public function __construct()
+    public function __construct(UserTransformer $transformer)
     {
         $this->middleware('guest');
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        $this->transformer = $transformer;
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param RegisterUserRequest $request
+     * @return mixed
      */
-    protected function create(array $data)
+    public function create(RegisterUserRequest $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = $this->dispatchNow(new RegisterUserCommand($request));
+        if($user){
+            return $this->respond([
+               "response" => [
+                    "data" => $this->transformer->transform($user),
+                    "access_token" => $user->token()
+               ],
+
+            ]);
+        };
+
+        return $this->respondWithError('There was an error creating the user.');
+
     }
 }

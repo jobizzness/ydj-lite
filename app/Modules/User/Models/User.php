@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules\User\Model;
+namespace App\Modules\User\Models;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'balance_id', 'social_id'
     ];
 
     /**
