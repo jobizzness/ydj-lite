@@ -9,7 +9,6 @@ class UserTransformer extends Transformer
     {
 
         $response = [
-            'object'               => 'User',
             'id'                   => $user->id,
             'name'                 => $user->name,
             'nickname'             => $user->nickname,
@@ -17,9 +16,13 @@ class UserTransformer extends Transformer
             'birth'                => $user->birth,
             'email'                => $user->email,
             'social_id'            => $user->social_id,
-            'avatar'               => $user->social_avatar,
+            'bio'                  => $user->bio,
+            'highlight'            => "something.jpg",
+            'avatar'               => $user->present()->avatar,
             'created_at'           => $user->created_at->diffForHumans(),
             'updated_at'           => $user->updated_at->diffForHumans(),
+            'balance'              => money_format ('%i', 0 ),
+
         ];
 
         $response = $this->ifAdmin([

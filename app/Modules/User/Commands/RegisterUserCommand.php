@@ -38,7 +38,7 @@ class RegisterUserCommand extends Command
     {
         $this->data = [
             'name' => $request->name,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'email' => $request->email
         ];
 

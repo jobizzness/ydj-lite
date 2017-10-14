@@ -19,6 +19,8 @@ class ModifyUsersTable extends Migration
             $table->date('birth')->nullable();
             $table->smallInteger('gender')->nullable();
             $table->string('lang')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('highlight')->nullable();
             $table->string('location')->nullable();
             $table->string('avatar')->nullable();
             $table->string('nickname')->unique()->nullable();
