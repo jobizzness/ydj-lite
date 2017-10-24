@@ -21,6 +21,7 @@ class ModifyUsersTable extends Migration
             $table->string('lang')->nullable();
             $table->text('bio')->nullable();
             $table->string('highlight')->nullable();
+            $table->smallInteger('is_seller')->default(0);
             $table->string('location')->nullable();
             $table->string('avatar')->nullable();
             $table->string('nickname')->unique()->nullable();
@@ -37,7 +38,7 @@ class ModifyUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['balance_id', 'social_id', 'birth', 'gender', 'lang', 'location', 'avatar',
-            'nickname', 'deleted_at']);
+            'nickname', 'deleted_at', 'is_seller']);
         });
     }
 }

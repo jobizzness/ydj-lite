@@ -18,6 +18,7 @@ class UserTransformer extends Transformer
             'social_id'            => $user->social_id,
             'bio'                  => $user->bio,
             'highlight'            => "something.jpg",
+            'is_seller'            => (boolean) $user->is_seller,
             'avatar'               => $user->present()->avatar,
             'created_at'           => $user->created_at->diffForHumans(),
             'updated_at'           => $user->updated_at->diffForHumans(),

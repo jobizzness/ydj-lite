@@ -31,4 +31,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function makeSeller()
+    {
+        $this->is_seller = true;
+        $this->save();
+        //I can dispatch events here if i want...
+    }
+
 }
