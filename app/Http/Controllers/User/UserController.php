@@ -46,4 +46,11 @@ class UserController extends ApiController
         return $this->respond($this->transformer->transform($this->request->user()));
     }
 
+    public function makeSeller()
+    {
+        if(!request()->user()->is_seller){
+            request()->user()->makeSeller();
+        }
+        return $this->respond(true);
+    }
 }
