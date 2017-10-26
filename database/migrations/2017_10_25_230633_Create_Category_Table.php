@@ -15,15 +15,19 @@ class CreateCategoryTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('description')->nullable();
+            $table->string('title')->nullable();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
 
-        Schema::create('product_categories', function (Blueprint $table) {
+        Schema::create('product_category', function (Blueprint $table) {
             $table->integer('product_id')->unsigned()->index();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
             $table->integer('category_id')->unsigned()->index();
-            $table->foreign('product_id')->refrences('id')->on('products')->onDelete('cascade');
-            $table->foreign('tag_id')->refrences('id')->on('tags')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -36,6 +40,6 @@ class CreateCategoryTable extends Migration
     public function down()
     {
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('product_categories');
+        Schema::dropIfExists('product_category');
     }
 }

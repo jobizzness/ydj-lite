@@ -8,9 +8,9 @@ class UserPresenter extends Presenter
     /**
      * @return string
      */
-    public function avatar()
+    public function currentAvatar()
     {
-        return !is_null($this->social_avatar) ?: "/images/defualt-profiles.png";
+        return !is_null($this->avatar) ?: "/images/defualt-profiles.png";
     }
 
     public function fullName()
@@ -20,6 +20,6 @@ class UserPresenter extends Presenter
 
     public function nickName()
     {
-        return $this->nicname;
+        return $this->nickname;
     }
 }

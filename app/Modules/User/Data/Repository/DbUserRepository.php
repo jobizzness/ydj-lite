@@ -4,7 +4,10 @@ use App\Modules\User\Models\User;
 
 class DbUserRepository implements UserRepositoryInterface
 {
-
+    /**
+     * @param array $data
+     * @return User
+     */
     public function create(array $data): User
     {
         return User::create([
@@ -15,4 +18,23 @@ class DbUserRepository implements UserRepositoryInterface
 
         ]);
     }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function findByNickname($name)
+    {
+        return User::whereNickname($name)->first();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function findById($id){
+
+        return User::find($id);
+    }
+
 }
