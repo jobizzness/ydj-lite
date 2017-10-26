@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/seller/make', 'User\UserController@makeSeller');
     Route::resource('user', 'User\UserController');
     Route::resource('media', 'Media\MediaController');
+    Route::resource('product', 'Product\ProductController');
 
 });
 

@@ -53,4 +53,9 @@ class UserController extends ApiController
         }
         return $this->respond(true);
     }
+
+    public function isSeller()
+    {
+        return (bool) $this->is_seller;
+    }
 }

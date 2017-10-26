@@ -17,4 +17,9 @@ class UserPresenter extends Presenter
     {
         return $this->name;
     }
+
+    public function nickName()
+    {
+        return $this->nicname;
+    }
 }
