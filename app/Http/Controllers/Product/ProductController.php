@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Product;
 
 use App\Modules\Product\Commands\CreateNewProductCommand;
+use App\Modules\Product\Models\Product;
 use App\Modules\Product\Requests\CreateProductRequest;
 use App\Modules\Product\Transformers\ProductTransformer;
 use Illuminate\Http\Request;
@@ -25,8 +26,20 @@ class ProductController extends ApiController
 
     public function index()
     {
-        //Product Listing
+        $products = Product::with('media', 'owner')->orderBy('created_at')->paginate(10);
+
+        if(! $products){
+            return $this->NotFound('No records found!');
+        }
+
+        return $this->respond([
+            'data' => $this->transformer->transformCollection($products),
+            'page_info' => [
+                'has_more' => $products->hasMorePages()
+            ]
+        ]);
     }
+
 
 
     /**

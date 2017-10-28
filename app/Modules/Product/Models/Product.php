@@ -1,6 +1,6 @@
 <?php namespace App\Modules\Product\Models;
 
-use App\Modiles\Categories\Models\Category;
+use App\Modules\Category\Models\Category;
 use App\Modules\Media\Models\Media;
 use App\Modules\Product\Presenter\ProductPresenter;
 use App\Modules\User\Models\User;

@@ -40,7 +40,7 @@ class ProductTransformer extends Transformer
         return [
             'name' => $product->owner->name,
             'avatar' => $product->owner->avatar,
-            "nickname" => $product->owner->present()->nickName,
+            "nickname" => $product->owner->nickname,
 
         ];
     }
@@ -65,9 +65,9 @@ class ProductTransformer extends Transformer
 
     private function getCategories($product)
     {
-        return [
+        $category = $product->categories()->first();
 
-        ];
+        if($category) return $category->slug;
     }
 
     private function listMedia($product)

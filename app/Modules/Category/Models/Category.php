@@ -1,4 +1,4 @@
-<?php namespace App\Modiles\Category\Models;
+<?php namespace App\Modules\Category\Models;
 
 use App\Modules\Product\Models\Product;
 use Illuminate\Database\Eloquent\Model;

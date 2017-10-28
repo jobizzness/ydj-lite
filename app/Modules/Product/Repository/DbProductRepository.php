@@ -1,11 +1,12 @@
 <?php namespace App\Modules\Product\Repository;
 
+use App\Modules\Category\Models\Category;
 use App\Modules\Media\Models\Media;
 use App\Modules\Product\Models\Product;
 
 class DbProductRepository implements ProductRepositoryInterface
 {
-    public function create($title, $description, $user_id, $price, $slug, Array $category, Array $media)
+    public function create($title, $description, $user_id, $price, $slug, Array $categories, $is_free, Array $media)
     {
         $product = new Product();
         $product->title = $title;
@@ -13,6 +14,7 @@ class DbProductRepository implements ProductRepositoryInterface
         $product->user_id = $user_id;
         $product->price = $price;
         $product->slug = $slug;
+        $product->is_free = $is_free;
         $product->save();
 
         //Attach Media
@@ -26,7 +28,7 @@ class DbProductRepository implements ProductRepositoryInterface
         }
 
         // Attach Categories
-        //$this->attachTags($tags, $product);
+        $this->attachCategories($categories, $product);
         return $product;
     }
 
@@ -49,8 +51,16 @@ class DbProductRepository implements ProductRepositoryInterface
         return $slug;
     }
 
-    private function attachTags($tags, $product)
+    public function byUser($id)
     {
-        $product->tags()->sync($tags);
+        return Product::with('owner','media')
+            ->where('user_id', $id)
+            ->orderByDesc('created_at');
+    }
+
+    private function attachCategories($categories, $product)
+    {
+//        TODO needs attention
+        $product->categories()->sync([Category::whereSlug($categories[0])->first()->id]);
     }
 }

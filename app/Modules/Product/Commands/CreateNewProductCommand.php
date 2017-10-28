@@ -39,6 +39,8 @@ class CreateNewProductCommand extends Command
      */
     protected $slug;
 
+    protected $is_free;
+
     /**
      * @var
      */
@@ -68,8 +70,9 @@ class CreateNewProductCommand extends Command
         $this->title = $data->title;
         $this->desc = $data->description;
         $this->user_id = $data->user()->id;
-        $this->categories = $data->categories ?: [];
+        $this->categories = $data->category ?[$data->category]: [];
         $this->price = $data->price;
+        $this->is_free = $data->is_free;
         $this->slug = $this->products->generateSlug($this->title);
         $this->media = $data->media_list ?: []; // [] Array
     }
@@ -88,6 +91,7 @@ class CreateNewProductCommand extends Command
             $this->price,
             $this->slug,
             $this->categories,
+            $this->is_free,
             $this->media
         );
     }

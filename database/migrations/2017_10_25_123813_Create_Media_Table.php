@@ -21,7 +21,7 @@ class CreateMediaTable extends Migration
             $table->string('medium')->nullable();
             $table->string('phone')->nullable();
             $table->string('small')->nullable();
-            $table->integer('product_id')->unsigned()->index()->default(0);
+            $table->integer('product_id')->unsigned()->index()->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->string('media_type')->nullable();

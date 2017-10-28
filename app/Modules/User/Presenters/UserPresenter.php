@@ -10,7 +10,7 @@ class UserPresenter extends Presenter
      */
     public function currentAvatar()
     {
-        return !is_null($this->avatar) ?: "/images/defualt-profiles.png";
+        return $this->avatar ?: "/images/defualt-profiles.png";
     }
 
     public function fullName()

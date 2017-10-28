@@ -1,5 +1,6 @@
 <?php namespace App\Modules\User\Commands;
 
+use App\Modules\User\Tasks\UploadAvatarTask;
 use Illuminate\Console\Command;
 
 class UpdateUserCommand extends Command
@@ -42,6 +43,11 @@ class UpdateUserCommand extends Command
      */
     public function handle()
     {
+        //Check if user changed their avatar
+        if(array_key_exists('avatar_image', $this->data)){
+            $this->data['avatar'] = dispatch_now(new UploadAvatarTask($this->data['avatar_image']));
+        }
+
       if(request()->user()->update($this->data)){
           return request()->user();
       }
