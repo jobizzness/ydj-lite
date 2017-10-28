@@ -14,13 +14,15 @@ class User extends Authenticatable
     use HasApiTokens, Notifiable, EntrustUserTrait, PresentableTrait;
 
     protected $presenter = UserPresenter::class;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'balance_id', 'social_id'
+        'name', 'email', 'password', 'avatar', 'company_name', 'location', 'highlight',
+        'bio', 'lang', 'gender', 'birth'
     ];
 
     /**
@@ -37,6 +39,11 @@ class User extends Authenticatable
         $this->is_seller = true;
         $this->save();
         //I can dispatch events here if i want...
+    }
+
+    public function isSeller()
+    {
+        return (bool) $this->is_seller;
     }
 
 }

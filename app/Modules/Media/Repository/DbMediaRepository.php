@@ -18,9 +18,10 @@ class DbMediaRepository implements MediaRepositoryInterface
         if($path){
 
             $media = new Media;
-            $media->src = $path;
+            $media->src = env('APP_URL') .'/storage/'. $path;
             $media->media_type = $file->getMimeType();
             $media->description = $file->getClientOriginalName();
+            $media->product_id = null;
             $media->save();
 
             return $media;

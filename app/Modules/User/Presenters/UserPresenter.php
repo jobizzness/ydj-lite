@@ -8,13 +8,18 @@ class UserPresenter extends Presenter
     /**
      * @return string
      */
-    public function avatar()
+    public function currentAvatar()
     {
-        return !is_null($this->social_avatar) ?: "/images/defualt-profiles.png";
+        return $this->avatar ?: "/images/defualt-profiles.png";
     }
 
     public function fullName()
     {
         return $this->name;
+    }
+
+    public function nickName()
+    {
+        return $this->nickname;
     }
 }

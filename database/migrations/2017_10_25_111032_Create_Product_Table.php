@@ -20,6 +20,7 @@ class CreateProductTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('description');
             $table->string('slug')->unique();
+            $table->boolean('freebee');
             $table->decimal('price', 10, 2)->nullable();
             $table->string('currency')->default('USD');
             $table->timestamps();

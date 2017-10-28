@@ -15,18 +15,25 @@ class UserTransformer extends Transformer
             'gender'               => $user->gender,
             'birth'                => $user->birth,
             'email'                => $user->email,
-            'social_id'            => $user->social_id,
             'bio'                  => $user->bio,
+            'location'             => $user->location,
             'highlight'            => "something.jpg",
             'is_seller'            => (boolean) $user->is_seller,
-            'avatar'               => $user->present()->avatar,
+            'avatar'               => $user->present()->currentAvatar,
             'created_at'           => $user->created_at->diffForHumans(),
             'updated_at'           => $user->updated_at->diffForHumans(),
             'balance'              => money_format ('%i', 0 ),
+            'purchases'            => []
 
         ];
 
         $response = $this->ifAdmin([
+
+        ], $response);
+
+        $response = $this->sellerResponse([
+            'products' => [],
+            'orders'    => []
 
         ], $response);
 
@@ -39,7 +46,7 @@ class UserTransformer extends Transformer
      * @param $clientResponse
      * @return array
      */
-    public function ifAdmin($adminResponse, $clientResponse)
+    private function ifAdmin($adminResponse, $clientResponse)
     {
         $user = $this->user();
         if (!is_null($user) && $user->hasRole('admin')) {
@@ -48,6 +55,13 @@ class UserTransformer extends Transformer
         return $clientResponse;
     }
 
+    private function sellerResponse($sellerResponse, $response)
+    {
+        if($this->user()->is_seller){
+            return array_merge($sellerResponse, $response);
+        }
+        return $response;
+    }
     /**
      * Get the current user
      */
