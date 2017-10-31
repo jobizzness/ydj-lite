@@ -37,7 +37,7 @@ class RegisterUserCommand extends Command
     public function __construct(RegisterUserRequest $request)
     {
         $this->data = [
-            'name' => $request->name,
+            'nickname' => $request->nickname,
             'password' => bcrypt($request->password),
             'email' => $request->email
         ];
@@ -55,7 +55,7 @@ class RegisterUserCommand extends Command
         return App::make(UserRepositoryInterface::class)->create([
             "email" => $this->data['email'],
             "password" => $this->data['password'],
-            "name" => $this->data['name']
+            "nickname" => $this->data['nickname']
         ]);
 
     }

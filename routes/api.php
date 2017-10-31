@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/seller/make', 'User\UserController@makeSeller');
     Route::resource('user', 'User\UserController');
-    Route::get('/user/{username}/products', 'Product\UserProductController@index');
+    Route::resource('user.products', 'Product\UserProductController');
     Route::get('profile/{username}', 'User\UserController@profile');
     Route::resource('media', 'Media\MediaController');
     Route::resource('product', 'Product\ProductController');
@@ -35,5 +35,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 |
 */
 Route::group(['middleware' => 'public:api'], function () {
-
+    Route::get('product', 'Product\ProductController@index');
+    //Route::get('/user/{username}/products', 'Product\UserProductController@index');
 });

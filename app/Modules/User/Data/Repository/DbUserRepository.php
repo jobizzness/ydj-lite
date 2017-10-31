@@ -11,7 +11,8 @@ class DbUserRepository implements UserRepositoryInterface
     public function create(array $data): User
     {
         return User::create([
-            "name" => $data['name'],
+            "nickname" => $data['nickname'],
+            "name"      => $data['nickname'],
             "email" => $data['email'],
             "password" => $data['password'],
             "balance_id" => null,
