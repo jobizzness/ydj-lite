@@ -11,11 +11,12 @@ class DbUserRepository implements UserRepositoryInterface
     public function create(array $data): User
     {
         return User::create([
-            "nickname" => $data['nickname'],
-            "name"      => $data['nickname'],
-            "email" => $data['email'],
-            "password" => $data['password'],
-            "balance_id" => null,
+            "nickname"          => $data['nickname'],
+            "name"              => $data['nickname'],
+            "email"             => $data['email'],
+            "password"          => $data['password'],
+            "balance_id"        => null,
+            "avatar"            => $data['avatar'] ?: ''
 
         ]);
     }
@@ -38,4 +39,18 @@ class DbUserRepository implements UserRepositoryInterface
         return User::find($id);
     }
 
+
+    public function findByEmailOrCreate($data)
+    {
+        $user = User::where('email', $data->email)
+            ->first();
+        if(!$user){
+            $data->nickname = $data->nickname ?:  rand(5, 15);
+            $data->password = null;
+            $data->name = $data->name;
+            $user = $this->create ( $data );
+        }
+        return $user;
+
+    }
 }

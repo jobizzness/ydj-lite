@@ -11,6 +11,12 @@
 |
 */
 
+//Social Auth
+Route::get('/login/{provider?}',[
+    'uses' => 'Auth\RegisterController@getSocialAuth',
+    'as'   => 'auth.getSocialAuth'
+]);
+
 Route::get('/', function () {
     return view('welcome');
 });
