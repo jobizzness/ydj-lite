@@ -59,8 +59,34 @@ class ProductController extends ApiController
         return $this->respond($this->transformer->transform($product));
     }
 
-    public function show()
+    public function show($id)
     {
+        $product = Product::whereSlug($id)
+        ->with('owner', 'media', 'categories')->first();
 
+        if(! $product){
+            return $this->requestFailed('Opps! There was an error getting the product');
+        }
+
+        return $this->respond($this->transformer->transform($product));
+    }
+
+    public function update($id)
+    {
+        $product = Product::whereSlug($id)->first();
+
+        if(request()->user()->id == $product->user_id){
+            $updated = $product->fill(request()->all())->save();
+
+            if(! $updated){
+                return $this->respond([
+                    'data' => [
+                        'message' => 'Opps! There was an updating the product'
+                    ]
+                ], 503);
+            }
+
+            return $this->respond($this->transformer->transform($product));
+        }
     }
 }

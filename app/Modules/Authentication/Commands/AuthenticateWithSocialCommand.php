@@ -47,19 +47,15 @@ class AuthenticateWithSocialCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param UserRepositoryInterface $users
-     * @param Socialite $socialite
-     * @param Authenticator $authenticator
      * @param $provider
      * @param $hasCode
      * @param $listener
      */
-    public function __construct(UserRepositoryInterface $users, Socialite $socialite, Authenticator $authenticator, $provider, $hasCode, $listener)
+    public function __construct($provider, $hasCode, $listener)
     {
         parent::__construct();
-        $this->users = $users;
-        $this->socialite = $socialite;
-        $this->auth = $authenticator;
+        $this->users = resolve(UserRepositoryInterface::class);
+        $this->auth = resolve(Authenticator::class);
         $this->listener = $listener;
         $this->provider = $provider;
         $this->hasCode = $hasCode;
@@ -83,7 +79,7 @@ class AuthenticateWithSocialCommand extends Command
      */
     private function getAuthorizationFirst($provider)
     {
-        return $this->socialite->driver($provider)->redirect();
+        return Socialite::with($provider)->redirect();
     }
     /**
      * Get data about a user from social plathform.
@@ -93,7 +89,7 @@ class AuthenticateWithSocialCommand extends Command
      */
     private function getProvidedUser($provider)
     {
-        return $this->socialite->driver($provider)->user();
+        return Socialite::with($provider)->user();
     }
 
 }

@@ -1,14 +1,11 @@
-<?php
-
-namespace App\Http\Controllers\Auth;
+<?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\ApiController;
 use App\Modules\Authentication\Commands\AuthenticateWithSocialCommand;
 use App\Modules\User\Commands\RegisterUserCommand;
 use App\Modules\User\Requests\RegisterUserRequest;
 use App\Modules\User\Transformers\UserTransformer;
-use App\User;
-
+use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
@@ -58,7 +55,7 @@ class RegisterController extends ApiController
     public function getSocialAuth($provider = null, Request $request)
     {
         if (!config("services.$provider")) abort('404');
-        return $this->dispatchNow(new AuthenticateWithSocialCommand($provider, ($request->has('code') || $request->has('oauth_token')), this));
+        return $this->dispatchNow(new AuthenticateWithSocialCommand($provider, ($request->has('code') || $request->has('oauth_token')), $this));
     }
 
     /**
