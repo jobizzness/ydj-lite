@@ -63,7 +63,7 @@ class ProductTransformer extends Transformer
     {
         return [
             'name'          => $product->owner->name,
-            'avatar'        => $product->owner->avatar,
+            'avatar'        => $product->owner->present()->currentAvatar,
             'nickname'      => $product->owner->nickname,
             'company'       => $product->owner->company
 
