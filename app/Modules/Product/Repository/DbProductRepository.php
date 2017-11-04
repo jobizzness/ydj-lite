@@ -6,7 +6,7 @@ use App\Modules\Product\Models\Product;
 
 class DbProductRepository implements ProductRepositoryInterface
 {
-    public function create($title, $description, $user_id, $price, $slug, Array $categories, $is_free, Array $media)
+    public function create($title, $description, $user_id, $price, $slug, Array $categories, $is_free, Array $media, $asset_url)
     {
         $product = new Product();
         $product->title = $title;
@@ -15,6 +15,7 @@ class DbProductRepository implements ProductRepositoryInterface
         $product->price = $price;
         $product->slug = $slug;
         $product->is_free = $is_free;
+        $product->asset = $asset_url;
         $product->save();
 
         //Attach Media
@@ -29,6 +30,7 @@ class DbProductRepository implements ProductRepositoryInterface
 
         // Attach Categories
         $this->attachCategories($categories, $product);
+
         return $product;
     }
 

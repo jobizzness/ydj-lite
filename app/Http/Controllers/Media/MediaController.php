@@ -35,12 +35,30 @@ class MediaController extends ApiController
      */
     public function store(CreateMediaRequest $request)
     {
+        //only allow IMAGE
+
         $media = $this->dispatchNow(new UploadMediaCommand(request()->file('file')));
         if(! $media){
             return $this->requestFailed('Opps! There was an error uploading the image');
         }
         return $this->respond($media->id);
     }
+
+    /**
+     * @return mixed
+     */
+    public function saveAsset()
+    {
+        //Only allow ZIP
+        $path = request()->file('file')->store('assets');
+
+        if($path){
+            return $this->respond(env('APP_URL') .'/storage/'. $path);
+        }
+
+        return $this->requestFailed('Opps! There was an error uploading the asset');
+    }
+
     /**
      * Display the specified resource.
      *

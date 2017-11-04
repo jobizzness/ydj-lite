@@ -76,6 +76,8 @@ class ProductController extends ApiController
         $product = Product::whereSlug($id)->first();
 
         if(request()->user()->id == $product->user_id){
+
+            dd(request()->all());
             $updated = $product->fill(request()->all())->save();
 
             if(! $updated){

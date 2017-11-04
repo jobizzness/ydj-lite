@@ -14,21 +14,45 @@ class ProductTransformer extends Transformer
      */
     public function transform($product)
     {
-        return [
-            'id' => $product->id,
-            'title' => $product->title,
-            'excerpt' =>  $product->present()->excerpt,
-            'description' => $product->present()->descriptionWithLinks,
-            'alt'         => $product->description,
-            'price' => $product->price ? number_format((float) $product->price, 2) : null,
-            'slug' => $product->slug,
-            'published_at' => $product->created_at->diffForHumans(),
-            'category' => $this->getCategories($product),
-            'owner' => $this->getOwner($product),
-            'media' => $this->getMedia($product),
-            'media_list' => $this->listMedia($product)
+        $response = [
+            'id'                => $product->id,
+            'title'             => $product->title,
+            'excerpt'           =>  $product->present()->excerpt,
+            'description'       => $product->present()->descriptionWithLinks,
+            'alt'               => $product->description,
+            'price'             => $product->price ? number_format((float) $product->price, 2) : null,
+            'slug'              => $product->slug,
+            'published_at'      => $product->created_at->diffForHumans(),
+            'category'          => $this->getCategories($product),
+            'owner'             => $this->getOwner($product),
+            'media'             => $this->getMedia($product),
+            'media_list'        => $this->listMedia($product),
+            'is_free'           => (boolean) $product->is_free,
+            'extensions'        => $product->extensions,
+            'size'              => '1.0 MB'
 
         ];
+
+        $response = $this->ifAdmin([
+
+        ], $response);
+
+
+        $response = $this->sellerResponse([
+            'asset_url' => $product->asset_url
+
+        ], $response);
+
+        return $response;
+    }
+
+    private function sellerResponse($sellerResponse, $response)
+    {
+        $user = $this->user();
+        if(!is_null($user) && $user->is_seller){
+            return array_merge($sellerResponse, $response);
+        }
+        return $response;
     }
 
     /**
@@ -38,9 +62,10 @@ class ProductTransformer extends Transformer
     private function getOwner($product)
     {
         return [
-            'name' => $product->owner->name,
-            'avatar' => $product->owner->avatar,
-            "nickname" => $product->owner->nickname,
+            'name'          => $product->owner->name,
+            'avatar'        => $product->owner->avatar,
+            'nickname'      => $product->owner->nickname,
+            'company'       => $product->owner->company
 
         ];
     }

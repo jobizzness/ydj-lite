@@ -40,6 +40,7 @@ class CreateNewProductCommand extends Command
     protected $slug;
 
     protected $is_free;
+    protected $asset_url;
 
     /**
      * @var
@@ -57,10 +58,11 @@ class CreateNewProductCommand extends Command
     protected $media;
 
     protected $desc;
+
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @param $data
      */
     public function __construct($data)
     {
@@ -75,6 +77,7 @@ class CreateNewProductCommand extends Command
         $this->is_free = $data->is_free;
         $this->slug = $this->products->generateSlug($this->title);
         $this->media = $data->media_list ?: []; // [] Array
+        $this->asset_url = $data->asset_url;
     }
 
     /**
@@ -92,7 +95,8 @@ class CreateNewProductCommand extends Command
             $this->slug,
             $this->categories,
             $this->is_free,
-            $this->media
+            $this->media,
+            $this->asset_url
         );
     }
 }

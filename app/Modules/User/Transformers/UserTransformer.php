@@ -1,6 +1,4 @@
 <?php namespace App\Modules\User\Transformers;
-
-
 use App\Transformers\Transformer;
 
 class UserTransformer extends Transformer
@@ -40,20 +38,6 @@ class UserTransformer extends Transformer
         return $response;
     }
 
-    /**
-     * Return sensitive data if admin
-     * @param $adminResponse
-     * @param $clientResponse
-     * @return array
-     */
-    private function ifAdmin($adminResponse, $clientResponse)
-    {
-        $user = $this->user();
-        if (!is_null($user) && $user->hasRole('admin')) {
-            return array_merge($clientResponse, $adminResponse);
-        }
-        return $clientResponse;
-    }
 
     private function sellerResponse($sellerResponse, $response)
     {
@@ -63,11 +47,5 @@ class UserTransformer extends Transformer
         }
         return $response;
     }
-    /**
-     * Get the current user
-     */
-    private function user()
-    {
-        return request()->user();
-    }
+
 }

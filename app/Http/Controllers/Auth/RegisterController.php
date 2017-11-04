@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
+    protected $transformer;
 
 
     /**

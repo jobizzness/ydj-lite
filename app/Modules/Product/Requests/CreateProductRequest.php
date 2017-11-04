@@ -26,7 +26,8 @@ class CreateProductRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'media_list' => 'required'
+            'media_list' => 'required',
+            'asset_url'  => 'required',
 
         ];
     }

@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('user.products', 'Product\UserProductController');
     Route::get('profile/{username}', 'User\UserController@profile');
     Route::resource('media', 'Media\MediaController');
+    Route::post('asset', 'Media\MediaController@saveAsset');
     Route::resource('product', 'Product\ProductController');
     Route::resource('category', 'Category\CategoryController');
 
@@ -36,5 +37,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 */
 Route::group(['middleware' => 'public:api'], function () {
     Route::get('product', 'Product\ProductController@index');
+    Route::get('product/{id}', 'Product\ProductController@show');
     //Route::get('/user/{username}/products', 'Product\UserProductController@index');
 });

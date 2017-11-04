@@ -12,7 +12,7 @@ class Product extends Model
     use PresentableTrait;
 
     protected $fillable = [
-        'title', 'description', 'price'
+        'title', 'description', 'price', 'extensions', 'asset_url', 'is_free'
     ];
 
     /**

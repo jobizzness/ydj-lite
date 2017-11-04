@@ -16,4 +16,27 @@ abstract class Transformer
             return $this->transform($item);
         });
     }
+
+    /**
+     * Return sensitive data if admin
+     * @param $adminResponse
+     * @param $clientResponse
+     * @return array
+     */
+    protected function ifAdmin($adminResponse, $clientResponse)
+    {
+        $user = $this->user();
+        if (!is_null($user) && $user->hasRole('admin')) {
+            return array_merge($clientResponse, $adminResponse);
+        }
+        return $clientResponse;
+    }
+
+    /**
+     * Get the current user
+     */
+    protected function user()
+    {
+        return request()->user();
+    }
 }
