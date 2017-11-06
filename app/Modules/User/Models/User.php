@@ -2,6 +2,8 @@
 namespace App\Modules\User\Models;
 
 
+use App\Cart;
+use App\Modules\Product\Models\Product;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,6 +46,20 @@ class User extends Authenticatable
     public function isSeller()
     {
         return (bool) $this->is_seller;
+    }
+
+    public function cart()
+    {
+        $cart = Cart::where('user_id', $this->id)->get();
+
+        $res=[];
+        if($cart){
+            foreach($cart as $item){
+                $res[] = Product::where('id', $item->item_id)->first();
+            }
+        }
+
+        return collect($res);
     }
 
 }

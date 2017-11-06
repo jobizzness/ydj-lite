@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers\Product;
 
+use App\Modules\Product\Commands\AddToCartCommand;
 use App\Modules\Product\Commands\CreateNewProductCommand;
 use App\Modules\Product\Models\Product;
 use App\Modules\Product\Requests\CreateProductRequest;
+use App\Modules\Product\Transformers\CartTransformer;
 use App\Modules\Product\Transformers\ProductTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
@@ -76,7 +78,7 @@ class ProductController extends ApiController
         $product = Product::whereSlug($id)->first();
 
         if(request()->user()->id == $product->user_id){
-            
+
             $updated = $product->fill(request()->all())->save();
 
             if(! $updated){
@@ -89,5 +91,28 @@ class ProductController extends ApiController
 
             return $this->respond($this->transformer->transform($product));
         }
+    }
+
+    /**
+     * Attach new cart item to the store
+     * or update and existing item
+     * @param $slug
+     * @return mixed
+     */
+    public function cartStore($slug)
+    {
+
+        $updatedCart = $this->dispatchNow(new AddToCartCommand($slug));
+
+        if(! $updatedCart){
+            return $this->respond([
+                'data' => [
+                    'message' => 'Opps! There was an adding the product'
+                ]
+            ], 503);
+        }
+
+        return $this->respond($updatedCart);
+
     }
 }

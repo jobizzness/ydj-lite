@@ -19,12 +19,19 @@ Route::post('/auth/register', 'Auth\RegisterController@create');
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/seller/make', 'User\UserController@makeSeller');
+
     Route::resource('user', 'User\UserController');
     Route::resource('user.products', 'Product\UserProductController');
     Route::get('profile/{username}', 'User\UserController@profile');
+
     Route::resource('media', 'Media\MediaController');
     Route::post('asset', 'Media\MediaController@saveAsset');
+
+    // Product & Cart
     Route::resource('product', 'Product\ProductController');
+    Route::post('/cart/{slug}', 'Product\ProductController@cartStore');
+
+
     Route::resource('category', 'Category\CategoryController');
 
 });

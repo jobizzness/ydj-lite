@@ -46,14 +46,6 @@ class ProductTransformer extends Transformer
         return $response;
     }
 
-    private function sellerResponse($sellerResponse, $response)
-    {
-        $user = $this->user();
-        if(!is_null($user) && $user->is_seller){
-            return array_merge($sellerResponse, $response);
-        }
-        return $response;
-    }
 
     /**
      * @param $product

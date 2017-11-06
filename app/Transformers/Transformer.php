@@ -8,7 +8,7 @@ abstract class Transformer
      * Transforms a collection using the transform method the the child class.
      *
      * @param $items
-     * @return
+     * @return array
      */
     public function TransformCollection($items)
     {
@@ -33,10 +33,25 @@ abstract class Transformer
     }
 
     /**
-     * Get the current user
+     * Current User
+     * @return mixed
      */
     protected function user()
     {
         return request()->user();
+    }
+
+    /**
+     * @param $sellerResponse
+     * @param $response
+     * @return array
+     */
+    protected function sellerResponse($sellerResponse, $response)
+    {
+        $user = $this->user();
+        if(!is_null($user) && $user->is_seller){
+            return array_merge($sellerResponse, $response);
+        }
+        return $response;
     }
 }

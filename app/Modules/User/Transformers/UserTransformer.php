@@ -21,7 +21,8 @@ class UserTransformer extends Transformer
             'created_at'           => $user->created_at->diffForHumans(),
             'updated_at'           => $user->updated_at->diffForHumans(),
             'balance'              => money_format ('%i', 0 ),
-            'purchases'            => []
+            'purchases'            => [],
+            'cart'                 => $this->getCart($user)
 
         ];
 
@@ -31,21 +32,38 @@ class UserTransformer extends Transformer
 
         $response = $this->sellerResponse([
             'products' => [],
-            'orders'    => []
+            'orders'    => [],
 
         ], $response);
 
         return $response;
     }
 
-
-    private function sellerResponse($sellerResponse, $response)
+    /**
+     * @param $user
+     * @return array
+     */
+    private function getCart($user)
     {
-        $user = $this->user();
-        if(!is_null($user) && $user->is_seller){
-            return array_merge($sellerResponse, $response);
-        }
+        $items = $user->cart();
+
+        $response = [
+            'total'     => 100,
+            'items'     => [],
+            'empty'     => false
+        ];
+
+        $response['items'] = $items->transform(function ($item, $key){
+            return [
+              'id'          => $item->id,
+              'thumbnail'   => '',
+              'slug'        => $item->slug,
+              'price'       => $item->price
+            ];
+        });
+
         return $response;
+
     }
 
 }

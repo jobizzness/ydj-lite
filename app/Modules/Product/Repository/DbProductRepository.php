@@ -60,6 +60,12 @@ class DbProductRepository implements ProductRepositoryInterface
             ->orderByDesc('created_at');
     }
 
+    public function findBySlug($identifier)
+    {
+        return Product::whereSlug($identifier);
+    }
+
+
     private function attachCategories($categories, $product)
     {
 //        TODO needs attention
