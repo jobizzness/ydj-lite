@@ -4,8 +4,35 @@ use App\Transformers\Transformer;
 
 class CartTransformer extends Transformer
 {
-    public function transform()
+    public function transform($items)
     {
-        
+        $response = [
+            'total'     => money_format ('%i', 0 ),
+            'items'     => [],
+            'empty'     => $items->isEmpty(),
+            'checkout'  => env('APP_URL') . '/api/checkout/' . request()->user()->id
+        ];
+
+        $response['items'] = $items->transform(function ($item, $key){
+            return [
+                'id'          => $item->id,
+                'thumbnail'   => $item->media[0]->src,
+                'slug'        => $item->slug,
+                'price'       => $item->price,
+                'title'       => $item->title
+            ];
+        });
+
+        if(!$items->isEmpty()) {
+            $total = 0;
+
+            foreach ($items as $item){
+                if(!$item['price']) return;
+                $total += $item['price'];
+            }
+
+            $response['total'] = money_format ('%i', $total );
+        }
+        return $response;
     }
 }

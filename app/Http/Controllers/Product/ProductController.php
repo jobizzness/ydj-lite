@@ -2,11 +2,11 @@
 
 use App\Modules\Product\Commands\AddToCartCommand;
 use App\Modules\Product\Commands\CreateNewProductCommand;
+use App\Modules\Product\Commands\RemoveFromCartCommand;
 use App\Modules\Product\Models\Product;
 use App\Modules\Product\Requests\CreateProductRequest;
 use App\Modules\Product\Transformers\CartTransformer;
 use App\Modules\Product\Transformers\ProductTransformer;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
 class ProductController extends ApiController
@@ -112,7 +112,26 @@ class ProductController extends ApiController
             ], 503);
         }
 
-        return $this->respond($updatedCart);
+        return $this->respond((new CartTransformer())->transform(request()->user()->cart()));
 
+    }
+
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function cartDestroy($slug)
+    {
+        $updatedCart = $this->dispatchNow(new RemoveFromCartCommand($slug));
+
+        if(! $updatedCart){
+            return $this->respond([
+                'data' => [
+                    'message' => 'Opps! There was an adding the product'
+                ]
+            ], 503);
+        }
+
+        return $this->respond((new CartTransformer())->transform(request()->user()->cart()));
     }
 }

@@ -12,6 +12,7 @@
         "laravel/passport": "^4.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "netshell/paypal": "dev-master",
         "zizaco/entrust": "^1.8"
     },
     "require-dev": {

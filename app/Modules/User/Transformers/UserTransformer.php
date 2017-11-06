@@ -1,4 +1,5 @@
 <?php namespace App\Modules\User\Transformers;
+use App\Modules\Product\Transformers\CartTransformer;
 use App\Transformers\Transformer;
 
 class UserTransformer extends Transformer
@@ -47,22 +48,7 @@ class UserTransformer extends Transformer
     {
         $items = $user->cart();
 
-        $response = [
-            'total'     => 100,
-            'items'     => [],
-            'empty'     => false
-        ];
-
-        $response['items'] = $items->transform(function ($item, $key){
-            return [
-              'id'          => $item->id,
-              'thumbnail'   => '',
-              'slug'        => $item->slug,
-              'price'       => $item->price
-            ];
-        });
-
-        return $response;
+        return (new CartTransformer())->transform($items);
 
     }
 

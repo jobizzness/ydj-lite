@@ -7,6 +7,8 @@
 |--------------------------------------------------------------------------
 |
 */
+//Hooks
+Route::get('/checkout/{$id}', 'Payment\PaymentController@getCheckout');
 
 Route::post('/auth/register', 'Auth\RegisterController@create');
 
@@ -30,7 +32,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Product & Cart
     Route::resource('product', 'Product\ProductController');
     Route::post('/cart/{slug}', 'Product\ProductController@cartStore');
-
+    Route::delete('/cart/{slug}', 'Product\ProductController@cartDestroy');
 
     Route::resource('category', 'Category\CategoryController');
 

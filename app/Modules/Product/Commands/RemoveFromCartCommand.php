@@ -6,7 +6,7 @@ use App\Cart;
 use App\Modules\Product\Tasks\GetProductTask;
 use Illuminate\Console\Command;
 
-class AddToCartCommand extends Command
+class RemoveFromCartCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -43,10 +43,9 @@ class AddToCartCommand extends Command
     {
         if(!$this->product) return;
 
-        Cart::forceCreate([
-            'user_id'       => request()->user()->id,
-            'item_id'       => $this->product->id
-        ]);
+        Cart::where('user_id', request()->user()->id)
+            ->where('item_id', $this->product->id)->delete();
+
 
         return true;
     }
