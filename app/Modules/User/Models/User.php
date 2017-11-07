@@ -52,14 +52,14 @@ class User extends Authenticatable
     {
         $cart = Cart::where('user_id', $this->id)->get();
 
-        $res=[];
+        $results=[];
         if($cart){
             foreach($cart as $item){
-                $res[] = Product::where('id', $item->item_id)->first();
+                $results[] = Product::where('id', $item->item_id)->first();
             }
         }
 
-        return collect($res);
+        return collect($results);
     }
 
 }
