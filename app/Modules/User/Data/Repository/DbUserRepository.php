@@ -45,10 +45,14 @@ class DbUserRepository implements UserRepositoryInterface
         $user = User::where('email', $data->email)
             ->first();
         if(!$user){
-            $data->nickname = $data->nickname ?:  rand(5, 15);
-            $data->password = null;
-            $data->name = $data->name;
-            $user = $this->create ( $data );
+            $user = $this->create ([
+                "nickname"          => $data->nickname ?:  rand(5, 15),
+                "name"              => $data->name,
+                "email"             => $data->email,
+                "password"          => null,
+                "balance_id"        => null,
+                "avatar"            => $data->avatar
+            ]);
         }
         return $user;
 
