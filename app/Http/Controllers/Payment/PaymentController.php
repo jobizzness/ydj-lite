@@ -14,9 +14,14 @@ class PaymentController extends Controller
      * @param $userId
      * @return mixed
      */
-    public function getCheckout($userId)
+    public function checkout($userId)
     {
       // Get the user and their cart
       // 
+    }
+
+    public function cancel()
+    {
+
     }
 }

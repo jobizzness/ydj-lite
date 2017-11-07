@@ -39,7 +39,7 @@ class ProductTransformer extends Transformer
 
 
         $response = $this->sellerResponse([
-            'asset_url' => $product->asset_url
+            'asset' => $product->asset
 
         ], $response);
 

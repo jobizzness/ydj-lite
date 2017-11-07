@@ -7,9 +7,9 @@
 |--------------------------------------------------------------------------
 |
 */
-//Hooks
-Route::get('/checkout/{$id}', 'Payment\PaymentController@getCheckout');
 
+
+// Hooks
 Route::post('/auth/register', 'Auth\RegisterController@create');
 
 /*
@@ -20,12 +20,13 @@ Route::post('/auth/register', 'Auth\RegisterController@create');
 */
 Route::group(['middleware' => 'auth:api'], function () {
 
-    Route::get('/seller/make', 'User\UserController@makeSeller');
-
+    // User & Seller with Store
     Route::resource('user', 'User\UserController');
     Route::resource('user.products', 'Product\UserProductController');
     Route::get('profile/{username}', 'User\UserController@profile');
+    Route::get('/seller/make', 'User\UserController@makeSeller');
 
+    //Media & Assets
     Route::resource('media', 'Media\MediaController');
     Route::post('asset', 'Media\MediaController@saveAsset');
 
@@ -34,6 +35,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/cart/{slug}', 'Product\ProductController@cartStore');
     Route::delete('/cart/{slug}', 'Product\ProductController@cartDestroy');
 
+    // Checkout
+    Route::get('/checkout', 'Payment\PaymentController@checkout');
+
+    // App Global stuff
     Route::resource('category', 'Category\CategoryController');
 
 });
@@ -45,6 +50,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 |
 */
 Route::group(['middleware' => 'public:api'], function () {
+
+    // Product
     Route::get('product', 'Product\ProductController@index');
     Route::get('product/{id}', 'Product\ProductController@show');
     //Route::get('/user/{username}/products', 'Product\UserProductController@index');

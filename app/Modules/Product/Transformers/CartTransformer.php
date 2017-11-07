@@ -27,7 +27,7 @@ class CartTransformer extends Transformer
             $total = 0;
 
             foreach ($items as $item){
-                if(!$item['price']) return;
+                if(!$item['price']) continue;
                 $total += $item['price'];
             }
 
