@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('product', 'Product\ProductController');
     Route::post('/cart/{slug}', 'Product\ProductController@cartStore');
     Route::delete('/cart/{slug}', 'Product\ProductController@cartDestroy');
+    Route::post('product-status/{command}', 'Product\ProductController@changeStatus');
 
     // Checkout
     Route::get('/checkout', 'Payment\PaymentController@checkout');

@@ -15,6 +15,13 @@ class Product extends Model
         'title', 'description', 'price', 'extensions', 'asset', 'is_free'
     ];
 
+    const STATUS = [
+        'draft' => 'DRAFT',
+        'publish' => 'PUBLISHED',
+        'approve'  => 'APPROVED',
+        'reject'  => 'REJECTED'
+    ];
+
     /**
      * @var string
      */
@@ -43,5 +50,10 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_category');
+    }
+
+    public function changeStatus($status)
+    {
+
     }
 }

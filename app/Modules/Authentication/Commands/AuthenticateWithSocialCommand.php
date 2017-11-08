@@ -67,7 +67,13 @@ class AuthenticateWithSocialCommand extends Command
     public function handle()
     {
         if(! $this->hasCode) return $this->getAuthorizationFirst($this->provider);
-        $user = $this->users->findByEmailOrCreate($this->getProvidedUser($this->provider));
+
+        $data = $this->getProvidedUser($this->provider);
+
+        //validate it here
+
+        
+        $user = $this->users->findByEmailOrCreate($data);
         return $this->listener->userHasLoggedIn($user);
     }
 

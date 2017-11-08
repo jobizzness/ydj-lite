@@ -28,7 +28,7 @@ class UserTransformer extends Transformer
         ];
 
         $response = $this->ifAdmin([
-
+            'is_admin' => $user->hasRole('admin')
         ], $response);
 
         $response = $this->sellerResponse([

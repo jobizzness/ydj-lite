@@ -3,6 +3,7 @@ namespace App\Modules\User\Models;
 
 
 use App\Cart;
+use App\Favorite;
 use App\Modules\Product\Models\Product;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -60,6 +61,11 @@ class User extends Authenticatable
         }
 
         return collect($results);
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Favorite::class, 'favorites', 'user_id', 'item_id')->withTimeStamps();
     }
 
 }

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Product;
 
+use App\Console\Commands\ChangProductStatusCommand;
 use App\Modules\Product\Commands\AddToCartCommand;
 use App\Modules\Product\Commands\CreateNewProductCommand;
 use App\Modules\Product\Commands\RemoveFromCartCommand;
@@ -8,6 +9,7 @@ use App\Modules\Product\Requests\CreateProductRequest;
 use App\Modules\Product\Transformers\CartTransformer;
 use App\Modules\Product\Transformers\ProductTransformer;
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\Request;
 
 class ProductController extends ApiController
 {
@@ -28,7 +30,9 @@ class ProductController extends ApiController
 
     public function index()
     {
-        $products = Product::with('media', 'owner')->orderBy('created_at')->paginate(10);
+        $products = Product::with('media', 'owner')
+                            ->orderBy('created_at')
+                            ->paginate(10);
 
         if(! $products){
             return $this->NotFound('No records found!');
@@ -133,5 +137,52 @@ class ProductController extends ApiController
         }
 
         return $this->respond((new CartTransformer())->transform(request()->user()->cart()));
+    }
+
+    /**
+     * Favorite a particular post
+     *
+     * @param  Post $post
+     * @return Response
+     */
+    public function favoriteProduct($slug)
+    {
+
+        //request()->user()->favorites()->attach($id);
+
+        //return back();
+    }
+
+    /**
+     * Unfavorite a particular post
+     *
+     * @param  Post $post
+     * @return Response
+     */
+    public function unFavoriteProduct($slug)
+    {
+        //request()->user()->favorites()->detach($iid);
+
+        //return true;
+    }
+
+    public function favorites()
+    {
+        //Give me the products i like
+    }
+
+    /**
+     * @param $command
+     * @param Request $request
+     * @return mixed
+     */
+    public function changeStatus($command, Request $request)
+    {
+        $changed = $this->dispatchNow(new ChangProductStatusCommand($command, $request->all()));
+
+        if($changed){
+            return $this->respond(true);
+        }
+        return $this->respondWithError(false);
     }
 }

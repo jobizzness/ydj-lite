@@ -29,7 +29,8 @@ class ProductTransformer extends Transformer
             'media_list'        => $this->listMedia($product),
             'is_free'           => (boolean) $product->is_free,
             'extensions'        => $product->extensions,
-            'size'              => '1.0 MB'
+            'size'              => '1.0 MB',
+            'status'            => $product->status
 
         ];
 
