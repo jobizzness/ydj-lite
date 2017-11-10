@@ -4,12 +4,13 @@ use App\Modules\Category\Models\Category;
 use App\Modules\Media\Models\Media;
 use App\Modules\Product\Presenter\ProductPresenter;
 use App\Modules\User\Models\User;
+use Conner\Likeable\LikeableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
 
 class Product extends Model
 {
-    use PresentableTrait;
+    use PresentableTrait, LikeableTrait;
 
     protected $fillable = [
         'title', 'description', 'price', 'extensions', 'asset', 'is_free'

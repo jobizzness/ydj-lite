@@ -25,14 +25,12 @@ class ChangProductStatusCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param $command
-     * @param $data
      */
-    public function __construct($command, $data)
+    public function __construct()
     {
         parent::__construct();
-        $this->command = $command;
-        $this->data = $data;
+        $this->command = request()->command;
+        $this->data = request()->all();
 
     }
 
@@ -81,6 +79,6 @@ class ChangProductStatusCommand extends Command
         $product->save();
 
         return true;
-        //user must be admin
+
     }
 }

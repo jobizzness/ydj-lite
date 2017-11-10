@@ -6,6 +6,7 @@ use App\Modules\Product\Commands\CreateNewProductCommand;
 use App\Modules\Product\Commands\RemoveFromCartCommand;
 use App\Modules\Product\Models\Product;
 use App\Modules\Product\Requests\CreateProductRequest;
+use App\Modules\Product\Tasks\GetProductTask;
 use App\Modules\Product\Transformers\CartTransformer;
 use App\Modules\Product\Transformers\ProductTransformer;
 use App\Http\Controllers\ApiController;
@@ -32,6 +33,7 @@ class ProductController extends ApiController
     {
         $products = Product::with('media', 'owner')
                             ->orderBy('created_at')
+                            ->where('status', Product::STATUS['approve'])
                             ->paginate(10);
 
         if(! $products){
@@ -46,7 +48,24 @@ class ProductController extends ApiController
         ]);
     }
 
+    public function productRequests()
+    {
+        $products = Product::with('media', 'owner')
+            ->orderBy('created_at')
+            ->where('status',  Product::STATUS['publish'])
+            ->paginate(10);
 
+        if(! $products){
+            return $this->NotFound('No records found!');
+        }
+
+        return $this->respond([
+            'data' => $this->transformer->transformCollection($products),
+            'page_info' => [
+                'has_more' => $products->hasMorePages()
+            ]
+        ]);
+    }
 
     /**
      * Create a new product
@@ -142,43 +161,65 @@ class ProductController extends ApiController
     /**
      * Favorite a particular post
      *
-     * @param  Post $post
+     * @param $slug
      * @return Response
      */
     public function favoriteProduct($slug)
     {
+        $product = $this->dispatchNow(new GetProductTask($slug));
 
-        //request()->user()->favorites()->attach($id);
-
-        //return back();
+        if($product){
+            $product->like();
+            return $this->respond(true);
+        }
+        return $this->respondWithError(false);
     }
 
     /**
      * Unfavorite a particular post
      *
-     * @param  Post $post
+     * @param $slug
      * @return Response
      */
     public function unFavoriteProduct($slug)
     {
-        //request()->user()->favorites()->detach($iid);
+        $product = $this->dispatchNow(new GetProductTask($slug));
 
-        //return true;
+        if($product){
+            $product->unlike();
+            return $this->respond(true);
+        }
+        return $this->respondWithError(false);
     }
 
     public function favorites()
     {
-        //Give me the products i like
+        $products = Product::whereLikedBy(request()->user()->id)
+            ->with('media', 'owner')
+            ->orderBy('created_at')
+            ->where('status', Product::STATUS['approve'])
+            ->paginate(10);
+
+        if(! $products){
+            return $this->NotFound('No records found!');
+        }
+
+        return $this->respond([
+            'data' => $this->transformer->transformCollection($products),
+            'page_info' => [
+                'has_more' => $products->hasMorePages()
+            ]
+        ]);
+
     }
 
     /**
      * @param $command
-     * @param Request $request
      * @return mixed
      */
-    public function changeStatus($command, Request $request)
+    public function changeStatus($command)
     {
-        $changed = $this->dispatchNow(new ChangProductStatusCommand($command, $request->all()));
+        $changed = $this->dispatchNow(new ChangProductStatusCommand());
 
         if($changed){
             return $this->respond(true);

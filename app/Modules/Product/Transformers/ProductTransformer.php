@@ -30,7 +30,8 @@ class ProductTransformer extends Transformer
             'is_free'           => (boolean) $product->is_free,
             'extensions'        => $product->extensions,
             'size'              => '1.0 MB',
-            'status'            => $product->status
+            'status'            => $product->status,
+            'views'             => $product->views
 
         ];
 

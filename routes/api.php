@@ -35,6 +35,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/cart/{slug}', 'Product\ProductController@cartStore');
     Route::delete('/cart/{slug}', 'Product\ProductController@cartDestroy');
     Route::post('product-status/{command}', 'Product\ProductController@changeStatus');
+    Route::get('/favorites', 'Product\ProductController@favorites');
+    Route::get('/requests', 'Product\ProductController@productRequests');
+    Route::get('/favorites/{slug}', 'Product\ProductController@favoriteProduct');
+    Route::delete('/favorites/{slug}', 'Product\ProductController@unFavoriteProduct');
 
     // Checkout
     Route::get('/checkout', 'Payment\PaymentController@checkout');
