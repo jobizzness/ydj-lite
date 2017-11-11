@@ -23,7 +23,8 @@ class UserTransformer extends Transformer
             'updated_at'           => $user->updated_at->diffForHumans(),
             'balance'              => money_format ('%i', 0 ),
             'purchases'            => [],
-            'cart'                 => $this->getCart($user)
+            'cart'                 => $this->getCart($user),
+            'billing'              => $user->billing
 
         ];
 
