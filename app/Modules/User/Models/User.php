@@ -53,6 +53,11 @@ class User extends Authenticatable
         return (bool) $this->is_seller;
     }
 
+    public function isAdmin()
+    {
+        return (bool) $this->hasRole('admin');
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */

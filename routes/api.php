@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/checkout', 'Payment\PaymentController@checkout');
     Route::get('/checkout/key', 'Payment\PaymentController@generateKey');
 
+    //Withdrawals
+    Route::resource('withdrawal', 'Payment\WithdrawalController');
+
     // App Global stuff
     Route::resource('category', 'Category\CategoryController');
 
