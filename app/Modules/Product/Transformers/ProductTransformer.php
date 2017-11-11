@@ -31,7 +31,8 @@ class ProductTransformer extends Transformer
             'extensions'        => $product->extensions,
             'size'              => '1.0 MB',
             'status'            => $product->status,
-            'views'             => $product->views
+            'views'             => $product->views,
+            'likes'             => $this->getLikes($product)
 
         ];
 
@@ -99,5 +100,13 @@ class ProductTransformer extends Transformer
 
         return $images;
 
+    }
+
+    private function getLikes($product)
+    {
+        return [
+            'count'             => $product->likeCount,
+            'is_liked'          => $product->liked()
+        ];
     }
 }

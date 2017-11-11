@@ -4,6 +4,7 @@ namespace App\Modules\User\Models;
 
 use App\Cart;
 use App\Favorite;
+use App\Modules\Order\Models\Order;
 use App\Modules\Product\Models\Product;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -44,25 +45,42 @@ class User extends Authenticatable
         //I can dispatch events here if i want...
     }
 
+    /**
+     * @return bool
+     */
     public function isSeller()
     {
         return (bool) $this->is_seller;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function cart()
     {
         $cart = Cart::where('user_id', $this->id)->get();
 
-        $results=[];
+        $results = [];
+
         if($cart){
             foreach($cart as $item){
                 $results[] = Product::where('id', $item->item_id)->first();
             }
         }
-
         return collect($results);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function favorites()
     {
         return $this->belongsToMany(Favorite::class, 'favorites', 'user_id', 'item_id')->withTimeStamps();

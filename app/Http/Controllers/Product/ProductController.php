@@ -116,6 +116,18 @@ class ProductController extends ApiController
         }
     }
 
+    public function viewProduct($slug)
+    {
+        $product = $this->dispatchNow(new GetProductTask($slug));
+
+        if($product){
+            $product->views +=1;
+            $product->save();
+            return $this->respond(true);
+        }
+        return $this->respondWithError(false);
+
+    }
     /**
      * Attach new cart item to the store
      * or update and existing item
@@ -159,37 +171,22 @@ class ProductController extends ApiController
     }
 
     /**
-     * Favorite a particular post
-     *
      * @param $slug
-     * @return Response
+     * @return mixed
      */
-    public function favoriteProduct($slug)
+    public function toggleLike($slug)
     {
         $product = $this->dispatchNow(new GetProductTask($slug));
 
-        if($product){
-            $product->like();
-            return $this->respond(true);
-        }
-        return $this->respondWithError(false);
-    }
+        if(!$product) return $this->respondWithError(false);
 
-    /**
-     * Unfavorite a particular post
-     *
-     * @param $slug
-     * @return Response
-     */
-    public function unFavoriteProduct($slug)
-    {
-        $product = $this->dispatchNow(new GetProductTask($slug));
+        $product->liked() ? $product->unlike() : $product->like();
 
-        if($product){
-            $product->unlike();
-            return $this->respond(true);
-        }
-        return $this->respondWithError(false);
+         return $this->respond([
+            'count'             => $product->likeCount,
+            'is_liked'          => $product->liked()
+         ]);
+
     }
 
     public function favorites()

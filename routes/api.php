@@ -37,11 +37,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('product-status/{command}', 'Product\ProductController@changeStatus');
     Route::get('/favorites', 'Product\ProductController@favorites');
     Route::get('/requests', 'Product\ProductController@productRequests');
-    Route::get('/favorites/{slug}', 'Product\ProductController@favoriteProduct');
-    Route::delete('/favorites/{slug}', 'Product\ProductController@unFavoriteProduct');
+    Route::get('/favorites/{slug}', 'Product\ProductController@toggleLike');
+    Route::get('/product-view/{slug}', 'Product\ProductController@viewProduct');
 
     // Checkout
     Route::get('/checkout', 'Payment\PaymentController@checkout');
+    Route::get('/checkout/key', 'Payment\PaymentController@generateKey');
 
     // App Global stuff
     Route::resource('category', 'Category\CategoryController');
