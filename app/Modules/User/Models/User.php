@@ -75,6 +75,11 @@ class User extends Authenticatable
         return collect($results);
     }
 
+    public function clearCart()
+    {
+        Cart::where('user_id', $this->id)->delete();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

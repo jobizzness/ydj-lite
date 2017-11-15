@@ -91,8 +91,9 @@ class VerifyPaypalTransactionCommand extends Command
         $this->order->is_paid = true;
         $this->order->save();
 
-        //mark all items as paid
-        //Order::setPaid($this->order->id);
+        $user = User::find($this->order->user_id)->first();
+
+        $user->clearCart();
 
     }
 }
