@@ -98,7 +98,7 @@ class CreatePaypalOrderCommand extends Command
     private function convertToPaypalItems($products)
     {
         return array_map(function($item){
-            PayPal::Item()
+            return PayPal::Item()
                 ->setQuantity(1)
                 ->setName($item['description'])
                 ->setPrice($item['price'])

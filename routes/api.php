@@ -12,9 +12,9 @@
 // Hooks
 Route::post('/auth/register', 'Auth\RegisterController@create');
 
-Route::get('/order/{order}/payment/succeed', 'PaymentController@verifyPaypalTransaction')->name('getDone');
+Route::get('/order/{order}/payment/succeed', 'Payment\PaymentController@verifyPaypalTransaction')->name('getDone');
 
-Route::get('/order/{order}/payment/fail', 'PaymentController@getCancel')->name('getCancel');
+Route::get('/order/{order}/payment/fail', 'Payment\PaymentController@getCancel')->name('getCancel');
 
 Route::group(['middleware' => 'public:api'], function () {
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\ApiController;
 use App\Modules\Order\Models\Order;
 use App\Modules\Order\Models\OrderProduct;
 use App\Modules\Payment\Commands\CreatePaypalOrderCommand;
+use App\Modules\Payment\Commands\VerifyPaypalTransactionCommand;
+use Illuminate\Http\Request;
 
 class PaymentController extends ApiController
 {
@@ -74,18 +76,18 @@ class PaymentController extends ApiController
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function verifyPaypalTransaction($order, Request $request)
+    public function verifyPaypalTransaction(Order $order, Request $request)
     {
 
-        $this->dispatch(new VerifyPaypalTransaction($order));
+        $this->dispatch(new VerifyPaypalTransactionCommand($order));
 
         //balance the user
-        foreach($order->products as $item)
-        {
-            //User::saleCompleted($item);
-        }
+//        foreach($order->products as $item)
+//        {
+//            //User::saleCompleted($item);
+//        }
 
-        return redirect('https://design.jobizzness.com/payment/success');
+        return redirect(env('SITE_URL'). 'cart/complete');
     }
 
     /**
@@ -96,6 +98,6 @@ class PaymentController extends ApiController
         //delete linked order attempt to prevent spam in the database
 
         // Curse and humiliate the user for cancelling this most sacred payment (yours)
-        return redirect('http://afrodapp.com/cart');
+        return redirect(env('SITE_URL'). 'cart');
     }
 }

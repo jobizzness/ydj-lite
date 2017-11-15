@@ -1,8 +1,13 @@
-<?php namespace App\Modules\Payment\Commands;
+<?php
 
+namespace App\Modules\Payment\Commands;
+
+use App\Modules\Order\Models\Order;
+use App\Modules\Payment\Models\Payment;
+use Paypal;
 use Illuminate\Console\Command;
 
-class VerifyPaypalTranscation extends Command
+class VerifyPaypalTransactionCommand extends Command
 {
     /**
      * The name and signature of the console command.
