@@ -3,29 +3,13 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\ApiController;
+use App\Modules\Order\Models\Order;
 use App\Modules\Order\Models\OrderProduct;
-use Braintree_ClientToken;
-use Braintree_Configuration;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Modules\Payment\Commands\CreatePaypalOrderCommand;
 
 class PaymentController extends ApiController
 {
 
-
-    public function __construct()
-    {
-        Braintree_Configuration::environment('sandbox');
-        Braintree_Configuration::merchantId('8w9tfzgrcjzxsxtv');
-        Braintree_Configuration::publicKey('ssbz9zjpx5fkbsnr');
-        Braintree_Configuration::privateKey('5ed2b4326ba3bc0617aeb0b85e83c6bf');
-
-    }
-
-    public function generateKey()
-    {
-        return $this->respond(Braintree_ClientToken::generate());
-    }
     /**
      * The user wants to buy something.
      * Lets take a look.
@@ -36,10 +20,10 @@ class PaymentController extends ApiController
     {
 
         $user = request()->user();
-        $products = $user->cart();
+        $items = $user->cart();
         $total = 0;
 
-        foreach ($products as $item){
+        foreach ($items as $item){
             if(!$item['price']) continue;
             $total += $item['price'];
         }
@@ -47,10 +31,21 @@ class PaymentController extends ApiController
         $order = $user->orders()->create([
             'total'     => $total,
             'is_paid'   => false,
-
         ]);
 
-        $this->addOrderItems($products, $order);
+        $this->addOrderItems($items, $order);
+
+        $response =  $this->dispatchNow(new CreatePaypalOrderCommand($order, $items));
+
+        if (! $response->links[1]) {
+            return $this->requestFailed('There was an error with the transaction');
+        }
+
+        return $this->respond([
+            'response' => [
+                'redirect_link' => $response->links[1]->href,
+            ]
+        ]);
 
 
     }
@@ -69,5 +64,38 @@ class PaymentController extends ApiController
                 'seller_id'     => $item['user_id']
             ]);
         }
+    }
+
+
+    /**
+     *  Verify PayPal Transaction.
+     *
+     * @param Order $order
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function verifyPaypalTransaction($order, Request $request)
+    {
+
+        $this->dispatch(new VerifyPaypalTransaction($order));
+
+        //balance the user
+        foreach($order->products as $item)
+        {
+            //User::saleCompleted($item);
+        }
+
+        return redirect('https://design.jobizzness.com/payment/success');
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function getCancel()
+    {
+        //delete linked order attempt to prevent spam in the database
+
+        // Curse and humiliate the user for cancelling this most sacred payment (yours)
+        return redirect('http://afrodapp.com/cart');
     }
 }

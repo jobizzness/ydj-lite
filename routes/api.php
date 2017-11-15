@@ -12,6 +12,17 @@
 // Hooks
 Route::post('/auth/register', 'Auth\RegisterController@create');
 
+Route::get('/order/{order}/payment/succeed', 'PaymentController@verifyPaypalTransaction')->name('getDone');
+
+Route::get('/order/{order}/payment/fail', 'PaymentController@getCancel')->name('getCancel');
+
+Route::group(['middleware' => 'public:api'], function () {
+
+    // Product
+    Route::get('/product/{id}', 'Product\ProductController@show');
+
+});
+
 /*
 |--------------------------------------------------------------------------
 | Protected Routes. |
@@ -58,10 +69,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 |--------------------------------------------------------------------------
 |
 */
+
 Route::group(['middleware' => 'public:api'], function () {
 
     // Product
     Route::get('product', 'Product\ProductController@index');
-    Route::get('product/{id}', 'Product\ProductController@show');
-    //Route::get('/user/{username}/products', 'Product\UserProductController@index');
+
 });

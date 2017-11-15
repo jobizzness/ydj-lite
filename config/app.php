@@ -170,6 +170,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Conner\Likeable\LikeableServiceProvider::class,
+        Netshell\Paypal\PaypalServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +232,7 @@ return [
         'Socialize' => Laravel\Socialite\Facades\Socialite::class,
         // App Package Facades
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Paypal' => Netshell\Paypal\Facades\Paypal::class
 
     ],
 

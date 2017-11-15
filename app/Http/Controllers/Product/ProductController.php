@@ -84,6 +84,10 @@ class ProductController extends ApiController
         return $this->respond($this->transformer->transform($product));
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
         $product = Product::whereSlug($id)
