@@ -2,6 +2,7 @@
 
 use App\Modules\Order\Models\Order;
 use App\Modules\Payment\Models\Payment;
+use App\Modules\User\Models\User;
 use Paypal;
 use Illuminate\Console\Command;
 
