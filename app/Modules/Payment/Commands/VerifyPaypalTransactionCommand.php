@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Modules\Payment\Commands;
+<?php namespace App\Modules\Payment\Commands;
 
 use App\Modules\Order\Models\Order;
 use App\Modules\Payment\Models\Payment;
