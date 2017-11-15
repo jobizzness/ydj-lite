@@ -60,11 +60,9 @@ class VerifyPaypalTransactionCommand extends Command
         $paymentExecution = PayPal::PaymentExecution();
 
         $paymentExecution->setPayerId($payer_id);
-        $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+        $payment->execute($paymentExecution, $this->_apiContext);
 
-        //get shipping address
-
-        $payerInfo = $payment->getPayer()->getPayerInfo();
+        //$payerInfo = $payment->getPayer()->getPayerInfo();
 
 
         //get sale array from paypal
