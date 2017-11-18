@@ -15,7 +15,7 @@ class DbUserRepository implements UserRepositoryInterface
             "name"              => $data['nickname'],
             "email"             => $data['email'],
             "password"          => $data['password'],
-            "balance_id"        => null,
+            "balance"           => 0.00,
             "avatar"            => $data['avatar'] ?: ''
 
         ]);

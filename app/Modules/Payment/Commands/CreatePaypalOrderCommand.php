@@ -64,13 +64,11 @@ class CreatePaypalOrderCommand extends Command
         $payer = PayPal::Payer();
         $payer->setPaymentMethod('paypal');
 
-        $total = Payment::chargeFees($this->order->total);
-
         $itemList = PayPal::ItemList();
         $itemList->setItems($this->convertToPaypalItems($this->items));
 
         $amount = PayPal::Amount();
-        $amount->setCurrency('USD')->setTotal($total);
+        $amount->setCurrency('USD')->setTotal($this->order->total);
 
 
         $transaction = PayPal::Transaction();

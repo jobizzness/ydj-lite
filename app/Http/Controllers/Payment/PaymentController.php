@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Payment;
 use App\Http\Controllers\ApiController;
 use App\Modules\Order\Models\Order;
 use App\Modules\Order\Models\OrderProduct;
+use App\Modules\Order\Tasks\CompleteOrderTask;
 use App\Modules\Payment\Commands\CreatePaypalOrderCommand;
 use App\Modules\Payment\Commands\VerifyPaypalTransactionCommand;
 use Illuminate\Http\Request;
@@ -81,13 +82,12 @@ class PaymentController extends ApiController
 
         $this->dispatch(new VerifyPaypalTransactionCommand($order));
 
-        //balance the user
-//        foreach($order->products as $item)
-//        {
-//            //User::saleCompleted($item);
-//        }
-
         return redirect(env('SITE_URL'). 'cart/complete');
+    }
+
+    public function test()
+    {
+        dispatch_now(new CompleteOrderTask(Order::find(25)));
     }
 
     /**
@@ -95,7 +95,7 @@ class PaymentController extends ApiController
      */
     public function getCancel()
     {
-        //delete linked order attempt to prevent spam in the database
+        //TODO delete linked order attempt to prevent spam in the database
 
         // Curse and humiliate the user for cancelling this most sacred payment (yours)
         return redirect(env('SITE_URL'). 'cart');

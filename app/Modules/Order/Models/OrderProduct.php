@@ -14,8 +14,14 @@ class OrderProduct extends Model
         'seller_id',
         'product_id'
     ];
+
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

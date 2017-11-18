@@ -2,6 +2,7 @@
 
 namespace App\Modules\Order\Models;
 
+use App\Modules\Product\Models\Product;
 use App\Modules\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,11 +16,12 @@ class Order extends Model
     ];
 
     /**
+     * Get the products associated with the order.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products()
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->BelongsToMany(Product::class, 'order_products')->withTimestamps();
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php namespace App\Modules\Payment\Commands;
 
 use App\Modules\Order\Models\Order;
+use App\Modules\Order\Tasks\CompleteOrderTask;
 use App\Modules\Payment\Models\Payment;
 use App\Modules\User\Models\User;
 use Paypal;
@@ -52,19 +53,8 @@ class VerifyPaypalTransactionCommand extends Command
      */
     public function handle()
     {
-        $id = request()->get('paymentId');
-        $token = request()->get('token');
-        $payer_id = request()->get('PayerID');
 
-        $payment = PayPal::getById($id, $this->_apiContext);
-
-        $paymentExecution = PayPal::PaymentExecution();
-
-        $paymentExecution->setPayerId($payer_id);
-        $payment->execute($paymentExecution, $this->_apiContext);
-
-        //$payerInfo = $payment->getPayer()->getPayerInfo();
-
+        $payment = $this->executePaypalPayment();
 
         //get sale array from paypal
         $transaction = $payment->getTransactions();
@@ -72,27 +62,60 @@ class VerifyPaypalTransactionCommand extends Command
         $sale = $resources[0]->getSale();
 
 
-        //transaction id
-        $transaction_id = $sale->getId();
+        $this->completeOrder()
+        ->clearCart()
+        ->storePaymentInformation($sale);
 
-        //amount buyer paid
-        $amount = $sale->getAmount()->getTotal();
+    }
 
-        //currency
-        $currency = $sale->getAmount()->currency;
+    /**
+     * @return $this
+     */
+    private function completeOrder()
+    {
+        dispatch_now(new CompleteOrderTask($this->order));
+        return $this;
+    }
 
-        $order_id = $this->order->id;
-
-        //add payment into payment table
-        $payment = Payment::create(compact('order_id', 'transaction_id', 'amount', 'currency'));
-
-        //mark order as paid
-        $this->order->is_paid = true;
-        $this->order->save();
-
+    /**
+     * @return $this
+     */
+    private function clearCart()
+    {
         $user = User::find($this->order->user_id)->first();
-
         $user->clearCart();
 
+        return $this;
+    }
+
+    /**
+     * @param $sale
+     * @return $this
+     */
+    private function storePaymentInformation($sale)
+    {
+        Payment::create([
+                'order_id'          => $this->order->id,
+                'transaction_id'    => $sale->getId(),
+                'amount'            => $sale->getAmount()->getTotal(),
+                'currency'          => $sale->getAmount()->currency
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function executePaypalPayment()
+    {
+        $paymentExecution = PayPal::PaymentExecution();
+
+        $payment = PayPal::getById(request()->get('paymentId'), $this->_apiContext);
+        $paymentExecution->setPayerId(request()->get('PayerID'));
+
+        $payment->execute($paymentExecution, $this->_apiContext);
+
+        return $payment;
     }
 }

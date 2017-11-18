@@ -21,7 +21,7 @@ class UserTransformer extends Transformer
             'avatar'               => $user->present()->currentAvatar,
             'created_at'           => $user->created_at->diffForHumans(),
             'updated_at'           => $user->updated_at->diffForHumans(),
-            'balance'              => money_format ('%i', 0 ),
+            'balance'              => money_format ('%i', $user->balance),
             'purchases'            => [],
             'cart'                 => $this->getCart($user),
             'billing'              => $user->billing

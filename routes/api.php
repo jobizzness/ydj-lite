@@ -58,6 +58,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     //Withdrawals
     Route::resource('withdrawal', 'Payment\WithdrawalController');
 
+    // Purchases
+    Route::get('purchases', 'Product\UserProductController@purchases');
+
     // App Global stuff
     Route::resource('category', 'Category\CategoryController');
 

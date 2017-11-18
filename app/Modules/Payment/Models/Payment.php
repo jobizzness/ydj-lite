@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Modules\Payment\Models;
+<?php namespace App\Modules\Payment\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,12 +11,17 @@ class Payment extends Model
         'amount',
         'currency'
     ];
+
     /**
-     * @param $amount
+     * Charge Fees and return the updated price
+     * @param $price
      * @return mixed
+     * @internal param $amount
      */
-    public static function chargeFees($amount)
+    public static function chargeFees($price=1)
     {
-        return $amount;
+        $fees = ( 22/100 * $price);
+
+        return ($price - $fees);
     }
 }

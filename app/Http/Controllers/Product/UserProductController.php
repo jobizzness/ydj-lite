@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\ApiController;
+use App\Modules\Order\Commands\GetBuyerPurchasesCommand;
+use App\Modules\Order\Transformers\PurchasesTransformer;
 use App\Modules\Product\Commands\GetSellerProductsCommand;
 use App\Modules\Product\Transformers\ProductTransformer;
 use Illuminate\Http\Request;
@@ -38,6 +40,27 @@ class UserProductController extends ApiController
             'data' => $this->transformer->transformCollection($products),
             'page_info' => [
                 'has_more' => $products->hasMorePages()
+            ]
+        ]);
+    }
+
+    /**
+     * @param PurchasesTransformer $transformer
+     * @return mixed
+     */
+    public function purchases(PurchasesTransformer $transformer)
+    {
+
+        $products = $this->dispatchNow(new GetBuyerPurchasesCommand(request()->user()));
+
+        if(! $products){
+            return $this->NotFound('No records found!');
+        }
+
+        return $this->respond([
+            'data' => $transformer->transformCollection($products),
+            'page_info' => [
+                'has_more' => false
             ]
         ]);
     }

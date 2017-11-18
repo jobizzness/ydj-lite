@@ -1,6 +1,4 @@
-<?php
-namespace App\Modules\User\Models;
-
+<?php namespace App\Modules\User\Models;
 
 use App\Cart;
 use App\Favorite;
@@ -38,6 +36,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     *
+     */
     public function makeSeller()
     {
         $this->is_seller = true;
@@ -53,6 +54,9 @@ class User extends Authenticatable
         return (bool) $this->is_seller;
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin()
     {
         return (bool) $this->hasRole('admin');
@@ -75,9 +79,32 @@ class User extends Authenticatable
         return collect($results);
     }
 
+    /**
+     *
+     */
     public function clearCart()
     {
         Cart::where('user_id', $this->id)->delete();
+    }
+
+    /**
+     * Amount in USD
+     * @param $amount
+     */
+    public function addAmount($amount)
+    {
+        $this->balance+= $amount;
+        $this->save();
+    }
+
+    /**
+     * Amount in USD
+     * @param $amount
+     */
+    public function subtractAmount($amount)
+    {
+        $this->balance+= -$amount;
+        $this->save();
     }
 
     /**
@@ -86,6 +113,14 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return $this
+     */
+    public function purchases()
+    {
+        return $this->hasMany(Order::class)->where('is_paid', true);
     }
 
     /**

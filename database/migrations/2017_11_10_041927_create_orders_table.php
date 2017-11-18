@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->integer('order_id')->index();
             $table->integer('product_id')->index();
             $table->integer('seller_id')->index();
+            $table->timestamps();
         });
     }
 
