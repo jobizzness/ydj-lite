@@ -20,8 +20,6 @@ class Payment extends Model
      */
     public static function chargeFees($price=1)
     {
-        $fees = ( 22/100 * $price);
 
-        return ($price - $fees);
     }
 }

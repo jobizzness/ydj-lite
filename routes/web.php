@@ -25,6 +25,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/purchases/download/{id}', 'Product\UserProductController@download');
+
 Route::get('/storage/{folder}/{file}', function ($folder, $file)
 {
 

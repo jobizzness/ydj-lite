@@ -4,6 +4,7 @@ use App\Cart;
 use App\Favorite;
 use App\Modules\Order\Models\Order;
 use App\Modules\Product\Models\Product;
+use App\Sale;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -115,6 +116,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'seller');
+    }
     /**
      * @return $this
      */

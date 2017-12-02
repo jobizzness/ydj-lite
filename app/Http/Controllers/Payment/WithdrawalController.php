@@ -79,7 +79,7 @@ class WithdrawalController extends ApiController
 
         $withdrawal->save();
 
-        $this->respond($this->transform($withdrawal));
+        $this->respond(true);
 
     }
     

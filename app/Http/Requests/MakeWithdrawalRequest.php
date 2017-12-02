@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class MakeWithdrawalRequest extends FormRequest
 {
@@ -13,7 +14,10 @@ class MakeWithdrawalRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return request()->user()->email === request()->email
+        && Hash::check(request()->password, request()->user()->password) &&
+            request()->user()->balance > request()->amount &&
+            request()->amount >= 30;
     }
 
     /**

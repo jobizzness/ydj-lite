@@ -1,6 +1,7 @@
 <?php namespace App\Modules\Order\Tasks;
 
 use App\Modules\Payment\Models\Payment;
+use App\Modules\Payment\Tasks\ChargeFeesTask;
 use App\Sale;
 use Illuminate\Console\Command;
 
@@ -71,7 +72,7 @@ class CompleteOrderTask extends Command
      */
     private function updateSellersBalance($product)
     {
-        $amount = Payment::chargeFees($product->price);
+        $amount = (new ChargeFeesTask($product->price))->getAmount();
         $product->owner->addAmount($amount);
 
     }

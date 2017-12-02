@@ -61,6 +61,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Purchases
     Route::get('purchases', 'Product\UserProductController@purchases');
 
+    Route::get('purchases/any', 'Product\UserProductController@getPurchasedItem');
+
+    //sales
+    Route::get('sales', 'Payment\PaymentController@sales');
+
     // App Global stuff
     Route::resource('category', 'Category\CategoryController');
 

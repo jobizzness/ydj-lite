@@ -9,12 +9,13 @@ class PurchasesTransformer extends Transformer
     public function transform($item)
     {
         return [
-            'id'          => $item->id,
+            'id'          => $item->pivot->product_id,
             'thumbnail'   => $item->media[0]->src,
             'slug'        => $item->slug,
             'price'       => $item->price,
             'title'       => $item->title,
-            'date'        => $item->pivot->created_at->diffForHumans()
+            'order'       => $item->pivot->order_id,
+            'date'        => $item->pivot->created_at ? $item->pivot->created_at->diffForHumans() : 'date'
         ];
 
 

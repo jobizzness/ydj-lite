@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Modules\User\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class Withdrawal extends Model
@@ -32,12 +33,12 @@ class Withdrawal extends Model
     {
         $prefix = 'YDJ00';
 
-        $code = $prefix + rand ( 4 , 4 );
+        $code = $prefix . mt_rand ( 100 , 10000 );
 
-        $records = Withdrawal::whereCode($code)->first();
+        $record = Withdrawal::where('code', $code)->first();
 
-        while($records){
-            self::makeCode();
+        if($record){
+            return self::makeCode();
         }
 
         return $code;

@@ -97,7 +97,16 @@ class PaymentController extends ApiController
     {
         //TODO delete linked order attempt to prevent spam in the database
 
-        // Curse and humiliate the user for cancelling this most sacred payment (yours)
         return redirect(env('SITE_URL'). 'cart');
+    }
+
+    public function sales()
+    {
+        if(!request()->user()->is_seller) throw new \Exception('oops you are weird');
+
+        $sales = request()->user()->sales()->with('product', 'buyer')->get();
+
+        return $this->respond($sales);
+
     }
 }
