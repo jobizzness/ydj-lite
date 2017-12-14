@@ -16,6 +16,8 @@ class Product extends Model
         'title', 'description', 'price', 'extensions', 'asset', 'is_free'
     ];
 
+    protected $softDelete = true;
+
     const STATUS = [
         'draft' => 'DRAFT',
         'publish' => 'PUBLISHED',
@@ -57,4 +59,5 @@ class Product extends Model
     {
 
     }
+
 }

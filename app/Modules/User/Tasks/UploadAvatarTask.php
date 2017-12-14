@@ -47,7 +47,6 @@ class UploadAvatarTask extends Command
         $source = base64_decode($data);
 
         $name = 'avatar' . request()->user()->username .'/' . rand() . '.jpg';
-
         Storage::put($name, $source);
 
         return env('APP_URL') . Storage::url($name);

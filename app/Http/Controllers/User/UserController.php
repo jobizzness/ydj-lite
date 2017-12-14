@@ -7,6 +7,7 @@ use App\Modules\User\Transformers\ProfileTransformer;
 use App\Modules\User\Commands\ViewUserProfileCommand;
 use Illuminate\Http\Request;
 use App\Modules\User\Transformers\UserTransformer;
+use Illuminate\Support\Facades\Storage;
 
 /**
  *
@@ -73,6 +74,23 @@ class UserController extends ApiController
         if(!$profile) return $this->NotFound('This user does not exist');
 
         return $profileTransformer->transform($profile);
+    }
+
+    /**
+     * @param Request $request
+     * @return false|string
+     */
+    public function uploadCover(Request $request)
+    {
+       $file = $request->file('file')->store('covers');
+
+        $cover = env('APP_URL') . Storage::url($file);
+        $request->user()->highlight = $cover;
+        $request->user()->save();
+
+        return $cover;
+
+
     }
 
     /**

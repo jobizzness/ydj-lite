@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // User & Seller with Store
     Route::resource('user', 'User\UserController');
     Route::resource('user.products', 'Product\UserProductController');
-    Route::get('profile/{username}', 'User\UserController@profile');
+    Route::post('profile-cover', 'User\UserController@uploadCover');
     Route::get('/seller/make', 'User\UserController@makeSeller');
 
     //Media & Assets
@@ -82,5 +82,5 @@ Route::group(['middleware' => 'public:api'], function () {
 
     // Product
     Route::get('product', 'Product\ProductController@index');
-
+    Route::get('profile/{username}', 'User\UserController@profile');
 });

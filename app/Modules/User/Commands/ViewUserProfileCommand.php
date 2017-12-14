@@ -51,6 +51,6 @@ class ViewUserProfileCommand extends Command
      */
     public function handle()
     {
-        return $this->call(new GetUserTask($this->username));
+        return (new GetUserTask($this->username))->handle();
     }
 }

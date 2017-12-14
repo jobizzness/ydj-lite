@@ -120,6 +120,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sale::class, 'seller');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     /**
      * @return $this
      */

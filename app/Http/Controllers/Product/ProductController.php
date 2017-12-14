@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Product;
 
 use App\Console\Commands\ChangProductStatusCommand;
+use App\Http\Requests\DeleteProductRequest;
 use App\Modules\Product\Commands\AddToCartCommand;
 use App\Modules\Product\Commands\CreateNewProductCommand;
 use App\Modules\Product\Commands\RemoveFromCartCommand;
@@ -226,5 +227,15 @@ class ProductController extends ApiController
             return $this->respond(true);
         }
         return $this->respondWithError(false);
+    }
+
+    public function destroy(DeleteProductRequest $request, $id)
+    {
+       $product =  $request->user()->products()->where('id', $id)->first();
+        if(! $product){
+            return $this->NotFound('No records found!');
+        }
+
+        Product::destroy($product->id);
     }
 }
