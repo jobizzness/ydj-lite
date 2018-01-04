@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Console\Commands\GetWithdrawals;
+use App\Events\WithdrawalReceived;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\MakeWithdrawalRequest;
 use App\Withdrawal;
@@ -78,6 +79,8 @@ class WithdrawalController extends ApiController
         $withdrawal->paypal = request()->user()->billing;
 
         $withdrawal->save();
+
+        event( new WithdrawalReceived( $withdrawal ) );
 
         $this->respond(true);
 

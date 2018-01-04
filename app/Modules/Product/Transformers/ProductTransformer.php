@@ -85,7 +85,7 @@ class ProductTransformer extends Transformer
 
     private function getCategories($product)
     {
-        $category = $product->categories()->first();
+        $category = $product->categories;
 
         if($category) return $category->slug;
     }

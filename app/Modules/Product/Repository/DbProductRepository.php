@@ -16,6 +16,7 @@ class DbProductRepository implements ProductRepositoryInterface
         $product->slug = $slug;
         $product->is_free = $is_free;
         $product->asset = $asset_url;
+        $product->category_id = $categories;
         $product->save();
 
         //Attach Media
@@ -29,7 +30,7 @@ class DbProductRepository implements ProductRepositoryInterface
         }
 
         // Attach Categories
-        $this->attachCategories($categories, $product);
+        //$this->attachCategories($categories, $product);
 
         return $product;
     }

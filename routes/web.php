@@ -18,7 +18,7 @@ Route::get('/login/{provider?}',[
 ]);
 
 Route::get('/', function () {
-    return view('welcome');
+    return new \App\Mail\Welcome((object) ['name' => 'matarr']);
 });
 
 Auth::routes();

@@ -1,5 +1,6 @@
 <?php namespace App\Modules\User\Data\Repository;
 
+use App\Events\UserRegistered;
 use App\Modules\User\Models\User;
 
 class DbUserRepository implements UserRepositoryInterface
@@ -10,7 +11,7 @@ class DbUserRepository implements UserRepositoryInterface
      */
     public function create(array $data): User
     {
-        return User::create([
+        $user = User::create([
             "nickname"          => $data['nickname'],
             "name"              => $data['nickname'],
             "email"             => $data['email'],
@@ -19,6 +20,10 @@ class DbUserRepository implements UserRepositoryInterface
             "avatar"            => $data['avatar'] ?: ''
 
         ]);
+
+        event( new UserRegistered($user) );
+
+        return $user;
     }
 
     /**

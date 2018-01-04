@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Events\ItemApproved;
+use App\Mail\ItemRejected;
 use App\Modules\Product\Models\Product;
 use App\Modules\Product\Tasks\GetProductTask;
 use Illuminate\Console\Command;
@@ -73,12 +75,30 @@ class ChangProductStatusCommand extends Command
         if(!request()->user()->hasRole('admin')) return false;
 
         $product = dispatch_now(new GetProductTask($this->data['slug']));
+        $this->product = $product;
         if(!$product) return false;
 
-        $product->status = Product::STATUS[$command];
+        $product->status = $command == 'approve'
+                ? $this->approve()
+                : $this->reject();
+
         $product->save();
 
         return true;
 
+    }
+
+    public function approve()
+    {
+        event( new ItemApproved( $this->product ) );
+
+        return Product::STATUS['approve'];
+    }
+
+    public function reject()
+    {
+        event( new ItemRejected( $this->product ) );
+
+       return Product::STATUS['reject'];
     }
 }

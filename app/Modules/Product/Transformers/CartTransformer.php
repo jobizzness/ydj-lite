@@ -9,8 +9,7 @@ class CartTransformer extends Transformer
         $response = [
             'total'     => money_format ('%i', 0 ),
             'items'     => [],
-            'empty'     => $items->isEmpty(),
-            'checkout'  => env('APP_URL') . '/api/checkout/' . request()->user()->id
+            'empty'     => $items->isEmpty()
         ];
 
         $response['items'] = $items->transform(function ($item, $key){

@@ -13,7 +13,7 @@ class Product extends Model
     use PresentableTrait, LikeableTrait;
 
     protected $fillable = [
-        'title', 'description', 'price', 'extensions', 'asset', 'is_free'
+        'title', 'description', 'price', 'extensions', 'asset', 'is_free', 'category_id'
     ];
 
     protected $softDelete = true;
@@ -31,6 +31,12 @@ class Product extends Model
     protected $presenter = ProductPresenter::class;
 
 
+    public function scopeCategory($query, $category)
+    {
+        if($category){
+            return $query->where('category_id', $category);
+        }
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -52,7 +58,7 @@ class Product extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'product_category');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function changeStatus($status)

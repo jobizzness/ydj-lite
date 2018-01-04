@@ -2,6 +2,7 @@
 
 use App\Console\Commands\ChangProductStatusCommand;
 use App\Http\Requests\DeleteProductRequest;
+use App\Modules\Category\Models\Category;
 use App\Modules\Product\Commands\AddToCartCommand;
 use App\Modules\Product\Commands\CreateNewProductCommand;
 use App\Modules\Product\Commands\RemoveFromCartCommand;
@@ -32,10 +33,22 @@ class ProductController extends ApiController
 
     public function index()
     {
+        $category = null;
+
+        if(request('category')){
+            $category = Category::whereSlug(request('category'))->first();
+        }
+
+        if($category){
+            $category = $category->id;
+        }
+
+
         $products = Product::with('media', 'owner')
-                            ->orderBy('created_at')
+                            ->orderBy('created_at', 'desc')
                             ->where('status', Product::STATUS['approve'])
-                            ->paginate(10);
+                            ->category($category)
+                            ->paginate(100);
 
         if(! $products){
             return $this->NotFound('No records found!');
