@@ -36,7 +36,7 @@ class RegisterController extends ApiController
             return $this->respond([
                "response" => [
                     "data" => $this->transformer->transform($user),
-                    "access_token" => $user->token()
+                    "access_token" => $user->createToken('API Token')->accessToken
                ],
 
             ]);
