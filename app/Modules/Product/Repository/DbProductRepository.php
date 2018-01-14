@@ -6,7 +6,7 @@ use App\Modules\Product\Models\Product;
 
 class DbProductRepository implements ProductRepositoryInterface
 {
-    public function create($title, $description, $user_id, $price, $slug, Array $categories, $is_free, Array $media, $asset_url)
+    public function create($title, $description, $user_id, $price, $slug, $categories, $is_free, Array $media, $asset_url)
     {
         $product = new Product();
         $product->title = $title;

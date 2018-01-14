@@ -2,7 +2,7 @@
 
 interface ProductRepositoryInterface
 {
-    public function create($title, $description, $user_id, $price, $slug, Array $category, $is_free, Array $media, $asset_url);
+    public function create($title, $description, $user_id, $price, $slug, $category, $is_free, Array $media, $asset_url);
 
     public function byUser($id);
 
