@@ -65,6 +65,6 @@ class RegisterController extends ApiController
      */
     public function userHasLoggedIn($user){
         $token = $user->createToken('API Token')->accessToken;
-        return redirect("https://design.jobizzness.com/?code=$token");
+        return redirect("https://market.yourdesignjuice.com/?code=$token");
     }
 }
