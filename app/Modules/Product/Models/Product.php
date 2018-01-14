@@ -13,7 +13,14 @@ class Product extends Model
     use PresentableTrait, LikeableTrait;
 
     protected $fillable = [
-        'title', 'description', 'price', 'extensions', 'asset', 'is_free', 'category_id'
+        'title',
+        'description',
+        'price',
+        'extensions',
+        'asset',
+        'is_free',
+        'category_id',
+        'username'
     ];
 
     protected $softDelete = true;

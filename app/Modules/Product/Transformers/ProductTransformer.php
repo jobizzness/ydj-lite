@@ -23,7 +23,7 @@ class ProductTransformer extends Transformer
             'price'             => $product->price ? number_format((float) $product->price, 2) : null,
             'slug'              => $product->slug,
             'published_at'      => $product->created_at->diffForHumans(),
-            'category'          => $this->getCategories($product),
+            'category'          => $product->category_id,
             'owner'             => $this->getOwner($product),
             'media'             => $this->getMedia($product),
             'media_list'        => $this->listMedia($product),
