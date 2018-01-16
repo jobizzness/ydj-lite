@@ -53,7 +53,7 @@ class MediaController extends ApiController
         $path = request()->file('file')->store('assets');
 
         if($path){
-            return $this->respond(env('APP_URL') .'/storage/'. $path);
+            return $this->respond(urlencode (env('APP_URL') .'/storage/'. $path));
         }
 
         return $this->requestFailed('Opps! There was an error uploading the asset');
