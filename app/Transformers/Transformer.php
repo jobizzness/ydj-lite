@@ -47,10 +47,19 @@ abstract class Transformer
      * @param $product
      * @return array
      */
-    protected function sellerResponse($sellerResponse, $response, $product)
+    protected function ownerOrAdmin($sellerResponse, $response, $product)
     {
         $user = $this->user();
         if(!is_null($user) && ($user->isAdmin() || $user->id === $product->user_id)){
+            return array_merge($sellerResponse, $response);
+        }
+        return $response;
+    }
+
+    public function sellerResponse($sellerResponse, $response)
+    {
+        $user = $this->user();
+        if(!is_null($user) && $user->is_seller){
             return array_merge($sellerResponse, $response);
         }
         return $response;

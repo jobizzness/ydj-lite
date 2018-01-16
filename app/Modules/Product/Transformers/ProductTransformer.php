@@ -41,7 +41,7 @@ class ProductTransformer extends Transformer
         ], $response);
 
 
-        $response = $this->sellerResponse([
+        $response = $this->ownerOrAdmin([
             'asset' => urldecode ($product->asset)
 
         ], $response, $product);
