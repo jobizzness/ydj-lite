@@ -44,12 +44,13 @@ abstract class Transformer
     /**
      * @param $sellerResponse
      * @param $response
+     * @param $product
      * @return array
      */
-    protected function sellerResponse($sellerResponse, $response)
+    protected function sellerResponse($sellerResponse, $response, $product)
     {
         $user = $this->user();
-        if(!is_null($user) && $user->is_seller){
+        if(!is_null($user) && ($user->isAdmin() || $user->id === $product->user_id)){
             return array_merge($sellerResponse, $response);
         }
         return $response;

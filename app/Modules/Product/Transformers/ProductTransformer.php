@@ -42,9 +42,9 @@ class ProductTransformer extends Transformer
 
 
         $response = $this->sellerResponse([
-            'asset' => $product->asset
+            'asset' => urldecode ($product->asset)
 
-        ], $response);
+        ], $response, $product);
 
         return $response;
     }
