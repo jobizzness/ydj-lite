@@ -44,7 +44,7 @@ class ProductController extends ApiController
         }
 
 
-        $products = Product::with('media', 'owner')
+        $products = Product::with('media', 'owner', 'category')
                             ->orderBy('created_at', 'desc')
                             ->where('status', Product::STATUS['approve'])
                             ->category($category)
@@ -105,7 +105,7 @@ class ProductController extends ApiController
     public function show($id)
     {
         $product = Product::whereSlug($id)
-        ->with('owner', 'media', 'categories')->first();
+        ->with('owner', 'media', 'category')->first();
 
         if(! $product){
             return $this->requestFailed('Opps! There was an error getting the product');

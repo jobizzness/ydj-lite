@@ -32,7 +32,7 @@ class Product extends Model
         'reject'  => 'REJECTED'
     ];
 
-    /**
+    /**0
      * @var string
      */
     protected $presenter = ProductPresenter::class;
@@ -63,7 +63,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }

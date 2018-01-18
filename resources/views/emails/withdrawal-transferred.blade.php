@@ -260,10 +260,12 @@
                                     <tr>
                                         <td align="center" style="padding:40px 90px 20px 90px; border-bottom:1px solid #e8e7e5;"><p style="color:#3d3d3d; font-size:18px; ">
                                                 <strong>Withdrawal request received</strong></p>
-                                            <img src="https://api.yourdesignjuice.com/images/icon-cash.png"><br /><br />
-                                            <p style="text-align:left;">Hi {{$name}},</p>
-                                            <p style="text-align:left;"><span style="line-height:20px">We have received your withdrawal request of <strong> {{$amount}} </strong> you made on <strong> {{$date}} </strong> . Your request will be processed on <strong>{{$date}}</strong> but it may take up to seven (7) business days for the amount to be credited into your account.</p>
-                                            <p style="line-height:20px; text-align: left">We will send you a second email confirmation once the process is complete.</p><br>
+                                            <img src="https://api.yourdesignjuice.com/images/icon-checked.png"><br /><br />
+                                            <strong>We transferred you money!</strong></p>
+                                <img src="images/icon-checked.png"><br /><br />
+                                  <p style="text-align:left;">[ Username ]!</p>
+                                  <p style="text-align:left;">You got paid!</p>
+                                  <p style="text-align:left;"><span style="line-height:20px">We have processed your request for <strong>[ Amount USD ]</strong>. The amount has been transferred to your PayPal account  <strong>( [user's PayPal email ])</strong>.</p><br>
 
 
                                         </td>

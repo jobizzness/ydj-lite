@@ -14,10 +14,8 @@ class MakeWithdrawalRequest extends FormRequest
      */
     public function authorize()
     {
-        return request()->user()->email === request()->email
-        && Hash::check(request()->password, request()->user()->password) &&
-            request()->user()->balance > request()->amount &&
-            request()->amount >= 30;
+        return request()->user()->balance > request()->amount &&
+            request()->amount >= 50;
     }
 
     /**

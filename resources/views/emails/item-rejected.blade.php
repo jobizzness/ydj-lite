@@ -197,10 +197,9 @@
                                                                                                             <td align="left" valign="top">&nbsp;</td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                                            <td  align="right" valign="top">
-                                                                                                                <img src="images/arrow.jpg" width="18" height="16" style="border-width:0; max-width:18px;height:auto; max-height:14px; padding-top:10px; padding-left:10px" alt=""/>
-                                                                                                                <font style="font-size:10px; text-decoration:none; color:#474b53; font-family: Verdana, Geneva, sans-serif; text-align:left; line-height:16px;">
-                                                                                                                    <a href="#" target="_blank" style="color:#474b53; text-decoration:none">View in a browser</a></font></td>
+                                                                                            <td  align="right" valign="top">
+                                                                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="images/logo.png" style="border-width:0; padding-top:10px;"/></a>
+                                                                                            </td>
                                                                                                         </tr>
                                                                                                     </table>
                                                                                             </tr>
@@ -262,10 +261,10 @@
                                         <td align="center" style="padding:40px 90px 20px 90px; border-bottom:1px solid #e8e7e5;"><p style="color:#3d3d3d; font-size:18px; ">
                                                 <strong>Your item was rejected</strong></p>
                                             <img src="https://api.yourdesignjuice.com/images/icon-unsmiley.png"><br /><br />
-                                            <p style="text-align:left;">Dear {{$name}},</p>
+                                            <p style="text-align:left;">Hi {{$name}},</p>
                                             <p style="text-align:left;"><span style="line-height:20px">We’ve reviewed your recently uploaded design asset {{$title}} and we regret to inform it was not approved.</span></p>
                                             <p style="line-height:20px; text-align:left;">Reason: Lacks creative/unique elements. Insufficient information provided.</p>
-                                            <p style="line-height:20px; text-align: left">But fret not! The key to being a successful Creativeprenuer is never give up. Please refer our <a href="#">Selling Guide</a> for some tips on how to improvise your work. Once you are ready with an improved version, feel free to update your item under the <strong>My Store</strong> section of your account. </p>
+                                            <p style="line-height:20px; text-align: left">But fret not! The key to being a successful Creativeprenuer is never give up. Please refer our <a href="images/selling_guide.pdf">Selling Guide</a> for some tips on how to improvise your work. Once you are ready with an improved version, feel free to update your item under the <strong>My Store</strong> section of your account. </p>
                                             <p style="line-height:20px; text-align: left">
                                                 Regards, <br>
                                                 YDJM Team
@@ -313,7 +312,7 @@
                                             <div class="column" style="width:100%;max-width:580px;display:inline-block;vertical-align:top;">
                                                 <table class="contents" style="border-spacing:0; width:100%">
                                                     <tr>
-                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">YDJ Marketplace is an exciting new design marketplace where uniquely designed digital goods are available.  Copyright © 2017 YDJ Marketplace. All Rights Reserved.</p></td>
+                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">This email was intended for you because you signed up for YDJ Marketplace. Do not reply to this auto-generated email. Copyright © 2018 YDJ Marketplace. All Rights Reserved.</p></td>
                                                     </tr>
                                                 </table>
                                             </div>

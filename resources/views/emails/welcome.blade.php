@@ -197,10 +197,9 @@
                                                                                                             <td align="left" valign="top">&nbsp;</td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                                            <td  align="right" valign="top">
-                                                                                                                <img src="https://api.yourdesignjuice.com/images/arrow.jpg" width="18" height="16" style="border-width:0; max-width:18px;height:auto; max-height:14px; padding-top:10px; padding-left:10px" alt=""/>
-                                                                                                                <font style="font-size:10px; text-decoration:none; color:#474b53; font-family: Verdana, Geneva, sans-serif; text-align:left; line-height:16px;">
-                                                                                                                    <a href="#" target="_blank" style="color:#474b53; text-decoration:none">View in a browser</a></font></td>
+                                                                                            <td  align="right" valign="top">
+                                                                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="images/logo.png" style="border-width:0; padding-top:10px;"/></a>
+                                                                                            </td>
                                                                                                         </tr>
                                                                                                     </table>
                                                                                             </tr>
@@ -261,7 +260,6 @@
                                     <tr>
                                         <td align="center" style="padding:40px 90px 20px 90px; border-bottom:1px solid #e8e7e5;"><p style="color:#3d3d3d; font-size:18px; text-align:center;">
                                                 <strong>Welcome to YDJ Marketplace {{$name }}!</strong></p>
-                                            <img src="https://api.yourdesignjuice.com/images/logo.png"><br /><br />
                                             <p><span style="line-height:20px">We’re so excited to have you aboard! To get started, just activate your newly created account by clicking below.</span></p>
 
                                             <!-- START BUTTON -->
@@ -278,7 +276,7 @@
                                                                 <tr>
                                                                     <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
                                                                             <tr>
-                                                                                <td width="220" height="50" align="center" bgcolor="#7250FF" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;"><a href="https://market.yourdesignjuice.com" style="width:220; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: #ffffff" class="button_link">Activate account</a></td>
+                                                                                <td width="220" height="50" align="center" bgcolor="#7250FF" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;"><a href="https://market.yourdesignjuice.com" style="width:220; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:16px; font-family: Arial, sans-serif; color: #ffffff" class="button_link">Activate account</a></td>
                                                                             </tr>
                                                                         </table></td>
                                                                 </tr>
@@ -331,7 +329,7 @@
                                             <div class="column" style="width:100%;max-width:580px;display:inline-block;vertical-align:top;">
                                                 <table class="contents" style="border-spacing:0; width:100%">
                                                     <tr>
-                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">YDJ Marketplace is an exciting new design marketplace where uniquely designed digital goods are available.  Copyright © 2017 YDJ Marketplace. All Rights Reserved.</p></td>
+                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">This email was intended for you because you signed up for YDJ Marketplace. Do not reply to this auto-generated email. Copyright © 2018 YDJ Marketplace. All rights reserved.</p></td>
                                                     </tr>
                                                 </table>
                                             </div>

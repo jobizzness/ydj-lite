@@ -24,6 +24,7 @@ class ProductTransformer extends Transformer
             'slug'              => $product->slug,
             'published_at'      => $product->created_at->diffForHumans(),
             'category'          => $product->category_id,
+            'category_name'     => optional($product->category)->name,
             'owner'             => $this->getOwner($product),
             'media'             => $this->getMedia($product),
             'media_list'        => $this->listMedia($product),

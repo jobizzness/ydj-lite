@@ -82,7 +82,7 @@ class PaymentController extends ApiController
 
         $this->dispatch(new VerifyPaypalTransactionCommand($order));
 
-        return redirect(env('SITE_URL'). 'cart/complete');
+        return redirect(env('SITE_URL'). '/cart/complete');
     }
 
     public function test()
@@ -97,7 +97,7 @@ class PaymentController extends ApiController
     {
         //TODO delete linked order attempt to prevent spam in the database
 
-        return redirect(env('SITE_URL'). 'cart');
+        return redirect(env('SITE_URL'). '/cart');
     }
 
     public function sales()

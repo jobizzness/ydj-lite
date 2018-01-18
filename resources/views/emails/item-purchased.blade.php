@@ -197,8 +197,9 @@
                                                                                                             <td align="left" valign="top">&nbsp;</td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                            <td  align="right" valign="top">
-                                                                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="images/logo.png" style="border-width:0; padding-top:10px;"/></a>
+                                            
+                                            <td  align="right" valign="top">
+                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="images/logo.png" style="border-width:0; padding-top:10px;"/></a>
                                                                                             </td>
                                                                                                         </tr>
                                                                                                     </table>
@@ -259,11 +260,38 @@
                                 <table class="one-column" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0; border-left:1px solid #e8e7e5; border-right:1px solid #e8e7e5; border-bottom:1px solid #e8e7e5;" bgcolor="#FFFFFF">
                                     <tr>
                                         <td align="center" style="padding:40px 90px 20px 90px; border-bottom:1px solid #e8e7e5;"><p style="color:#3d3d3d; font-size:18px; ">
-                                                <strong>Withdrawal request received</strong></p>
-                                            <img src="https://api.yourdesignjuice.com/images/icon-cash.png"><br /><br />
-                                            <p style="text-align:left;">Hi {{$name}},</p>
-                                            <p style="text-align:left;"><span style="line-height:20px">We have received your withdrawal request of <strong> {{$amount}} </strong> you made on <strong> {{$date}} </strong> . Your request will be processed on <strong>{{$date}}</strong> but it may take up to seven (7) business days for the amount to be credited into your account.</p>
-                                            <p style="line-height:20px; text-align: left">We will send you a second email confirmation once the process is complete.</p><br>
+                                                
+                                           <strong>Thank you for your purchase!</strong></p>
+                                           <img src="images/icon-cart.png"><br /><br />
+                    <p style="text-align:left;">Hello [ Username ],</p>
+                      <p style="text-align:left;"><span style="line-height:20px">You have recently purchased [ Item Name ] on [ Date of purchase ]. Your file is available for download.</p>
+                      
+                          <!-- Get It Now button -->
+                          <!-- START BUTTON -->                      
+                      <center>
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                          <tr>
+                            <td><table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                  <td height="20" width="100%" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                                </tr>
+                              </table>
+                              <table border="0" align="center" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
+                                <tbody>
+                                  <tr>
+                                    <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
+                                        <tr>
+                                          <td width="220" height="50" align="center" bgcolor="#70c738" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;"><a href="#" style="width:220; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:16px; font-family: Arial, sans-serif; color: #ffffff" class="button_link">Download now</a></td>
+                                        </tr>
+                                      </table></td>
+                                  </tr>
+                                </tbody>
+                              </table></td>
+                          </tr>
+                        </table>
+                      </center>
+                      
+                      <!-- END BUTTON -->
 
 
                                         </td>
@@ -308,7 +336,7 @@
                                             <div class="column" style="width:100%;max-width:580px;display:inline-block;vertical-align:top;">
                                                 <table class="contents" style="border-spacing:0; width:100%">
                                                     <tr>
-                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">This email was intended for you because you signed up for YDJ Marketplace. Do not reply to this auto-generated email. Copyright © 2018 YDJ Marketplace. All rights reserved.</p></td>
+                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">This email was intended for you because you signed up for YDJ Marketplace. Do not reply to this auto-generated email. Copyright © 2018 YDJ Marketplace. All Rights Reserved.</p></td>
                                                     </tr>
                                                 </table>
                                             </div>
