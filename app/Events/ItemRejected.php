@@ -13,7 +13,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class ItemRejected
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    private $product;
+    public $product;
 
     /**
      * Create a new event instance.
