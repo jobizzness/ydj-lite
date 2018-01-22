@@ -198,8 +198,8 @@
                                                                                                         </tr>
                                                                                                         <tr>
                                             
-                                            <td  align="right" valign="top">
-                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="images/logo.png" style="border-width:0; padding-top:10px;"/></a>
+                                            <td  align="left" valign="top">
+                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="https://api.yourdesignjuice.com/images/logo.png" style="border-width:0; padding-top:10px;"/></a>
                                                                                             </td>
                                                                                                         </tr>
                                                                                                     </table>
@@ -262,36 +262,11 @@
                                         <td align="center" style="padding:40px 90px 20px 90px; border-bottom:1px solid #e8e7e5;"><p style="color:#3d3d3d; font-size:18px; ">
                                                 
                                            <strong>Thank you for your purchase!</strong></p>
-                                           <img src="images/icon-cart.png"><br /><br />
+                                           <img src="https://api.yourdesignjuice.com/images/icon-cart.png"><br /><br />
                     <p style="text-align:left;">Hello [ Username ],</p>
-                      <p style="text-align:left;"><span style="line-height:20px">You have recently purchased [ Item Name ] on [ Date of purchase ]. Your file is available for download.</p>
+                      <p style="text-align:left;"><span style="line-height:20px">Your file is now ready for download. Just head to <strong>Purchases</strong> in your account to download.</p><br>
                       
-                          <!-- Get It Now button -->
-                          <!-- START BUTTON -->                      
-                      <center>
-                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                          <tr>
-                            <td><table border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                  <td height="20" width="100%" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
-                                </tr>
-                              </table>
-                              <table border="0" align="center" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                                <tbody>
-                                  <tr>
-                                    <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                                        <tr>
-                                          <td width="220" height="50" align="center" bgcolor="#70c738" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;"><a href="#" style="width:220; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:16px; font-family: Arial, sans-serif; color: #ffffff" class="button_link">Download now</a></td>
-                                        </tr>
-                                      </table></td>
-                                  </tr>
-                                </tbody>
-                              </table></td>
-                          </tr>
-                        </table>
-                      </center>
-                      
-                      <!-- END BUTTON -->
+                          
 
 
                                         </td>

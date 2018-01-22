@@ -197,8 +197,8 @@
                                                                                                             <td align="left" valign="top">&nbsp;</td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                            <td  align="right" valign="top">
-                                                                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="images/logo.png" style="border-width:0; padding-top:10px;"/></a>
+                                                                                            <td  align="left" valign="top">
+                                                                                                <a href="https://market.yourdesignjuice.com" target="_blank"><img src="https://api.yourdesignjuice.com/images/logo.png" style="border-width:0; padding-top:10px;"/></a>
                                                                                             </td>
                                                                                                         </tr>
                                                                                                     </table>

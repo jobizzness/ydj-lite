@@ -259,16 +259,12 @@
                                 <table class="one-column" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0; border-left:1px solid #e8e7e5; border-right:1px solid #e8e7e5; border-bottom:1px solid #e8e7e5;" bgcolor="#FFFFFF">
                                     <tr>
                                         <td align="center" style="padding:40px 90px 20px 90px; border-bottom:1px solid #e8e7e5;"><p style="color:#3d3d3d; font-size:18px; ">
-                                                <strong>Your item was rejected</strong></p>
-                                            <img src="https://api.yourdesignjuice.com/images/icon-unsmiley.png"><br /><br />
-                                            <p style="text-align:left;">Hi {{$name}},</p>
-                                            <p style="text-align:left;"><span style="line-height:20px">We’ve reviewed your recently uploaded design asset {{$title}} and we regret to inform it was not approved.</span></p>
-                                            <p style="line-height:20px; text-align:left;">Reason: Lacks creative/unique elements. Insufficient information provided.</p>
-                                            <p style="line-height:20px; text-align: left">But fret not! The key to being a successful Creativeprenuer is never give up. Please refer our <a href="https://api.yourdesignjuice.com/images/selling_guide.pdf">Selling Guide</a> for some tips on how to improvise your work. Once you are ready with an improved version, feel free to update your item under the <strong>My Store</strong> section of your account. </p>
-                                            <p style="line-height:20px; text-align: left">
-                                                Regards, <br>
-                                                YDJM Team
-                                            </p>
+                                                <strong>Withdrawal request received</strong></p>
+                                            <img src="https://api.yourdesignjuice.com/images/icon-unsmiley.png"><br />
+                                <img src="images/icon-checked.png"><br /><br />
+                                  <p style="text-align:left;">Dear [ Username ],</p>
+                                  <p style="text-align:left;"><span style="line-height:20px">We regret to inform that your withdrawal request for <strong>[ Amount USD ]</strong> on <strong>[ dd/mm/yy ]</strong> is rejected. The withdrawal threshold is <strong>USD$50.00</strong>. Make sure you have sufficient amount in your account to withdraw.</p><br/>
+
 
                                         </td>
                                     </tr>
@@ -312,7 +308,7 @@
                                             <div class="column" style="width:100%;max-width:580px;display:inline-block;vertical-align:top;">
                                                 <table class="contents" style="border-spacing:0; width:100%">
                                                     <tr>
-                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">This email was intended for you because you signed up for YDJ Marketplace. Do not reply to this auto-generated email. Copyright © 2018 YDJ Marketplace. All Rights Reserved.</p></td>
+                                                        <td width="100%" align="middle" valign="middle" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><p style="font-size:12px; color: #b8b8b8;">This email was intended for you because you signed up for YDJ Marketplace. Do not reply to this auto-generated email. Copyright © 2018 YDJ Marketplace. All rights reserved.</p></td>
                                                     </tr>
                                                 </table>
                                             </div>
