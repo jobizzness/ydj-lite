@@ -23,7 +23,7 @@ class ItemRejected extends Mailable
     /**
      * @var
      */
-    private $product;
+    public $product;
 
     public $subject = 'Your item was rejected';
 
