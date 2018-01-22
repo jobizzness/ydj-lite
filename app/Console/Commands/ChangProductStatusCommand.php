@@ -32,7 +32,7 @@ class ChangProductStatusCommand extends Command
     {
         parent::__construct();
         $this->command = request()->command;
-        $this->data = request()->all();
+    $this->data = request()->all();
 
     }
 
@@ -63,7 +63,7 @@ class ChangProductStatusCommand extends Command
         $product = dispatch_now(new GetProductTask($this->data['slug']));
         if(!$product) return false;
 
-        if($product->status === Product::STATUS['draft']){
+        if($product->status != Product::STATUS['approve']){
             $product->status = Product::STATUS['publish'];
             $product->save();
         }
