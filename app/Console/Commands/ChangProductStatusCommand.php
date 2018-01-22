@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Events\ItemApproved;
-use App\Mail\ItemRejected;
+use App\Events\ItemRejected;
 use App\Modules\Product\Models\Product;
 use App\Modules\Product\Tasks\GetProductTask;
 use Illuminate\Console\Command;
