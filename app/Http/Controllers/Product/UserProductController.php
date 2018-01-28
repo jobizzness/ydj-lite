@@ -124,6 +124,6 @@ class UserProductController extends ApiController
 
         if(!$urlSigner->validate($request->fullUrl())) return  'fraud';
 
-        return response()->download($product->asset_url);
+        return redirect()->to($product->asset);
     }
 }
