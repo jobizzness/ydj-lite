@@ -1,6 +1,5 @@
 <?php namespace App\Modules\User\Transformers;
-
-
+use App\Modules\Product\Transformers\CartTransformer;
 use App\Transformers\Transformer;
 
 class UserTransformer extends Transformer
@@ -15,17 +14,27 @@ class UserTransformer extends Transformer
             'gender'               => $user->gender,
             'birth'                => $user->birth,
             'email'                => $user->email,
-            'social_id'            => $user->social_id,
             'bio'                  => $user->bio,
+            'location'             => $user->location,
             'highlight'            => "something.jpg",
-            'avatar'               => $user->present()->avatar,
+            'is_seller'            => (boolean) $user->is_seller,
+            'avatar'               => $user->present()->currentAvatar,
             'created_at'           => $user->created_at->diffForHumans(),
             'updated_at'           => $user->updated_at->diffForHumans(),
-            'balance'              => money_format ('%i', 0 ),
+            'balance'              => money_format ('%i', $user->balance),
+            'purchases'            => [],
+            'cart'                 => $this->getCart($user),
+            'billing'              => $user->billing
 
         ];
 
         $response = $this->ifAdmin([
+            'is_admin' => $user->hasRole('admin')
+        ], $response);
+
+        $response = $this->sellerResponse([
+            'products' => [],
+            'orders'    => [],
 
         ], $response);
 
@@ -33,25 +42,15 @@ class UserTransformer extends Transformer
     }
 
     /**
-     * Return sensitive data if admin
-     * @param $adminResponse
-     * @param $clientResponse
+     * @param $user
      * @return array
      */
-    public function ifAdmin($adminResponse, $clientResponse)
+    private function getCart($user)
     {
-        $user = $this->user();
-        if (!is_null($user) && $user->hasRole('admin')) {
-            return array_merge($clientResponse, $adminResponse);
-        }
-        return $clientResponse;
+        $items = $user->cart();
+
+        return (new CartTransformer())->transform($items);
+
     }
 
-    /**
-     * Get the current user
-     */
-    private function user()
-    {
-        return request()->user();
-    }
 }

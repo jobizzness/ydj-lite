@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\ItemApproved;
+use App\Events\ItemRejected;
+use App\Events\UserRegistered;
+use App\Events\WithdrawalReceived;
+use App\Listeners\NotifiyItemApproved;
+use App\Listeners\NotifiyItemRejected;
+use App\Listeners\NotifyWithdrawalReceived;
+use App\Listeners\SendWelcomeEmail;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,9 +21,18 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        UserRegistered::class => [
+            SendWelcomeEmail::class,
         ],
+        WithdrawalReceived::class => [
+            NotifyWithdrawalReceived::class,
+        ],
+        ItemApproved::class => [
+            NotifiyItemApproved::class,
+        ],
+        ItemRejected::class => [
+            NotifiyItemRejected::class,
+        ]
     ];
 
     /**

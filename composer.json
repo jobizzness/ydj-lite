@@ -6,11 +6,17 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "braintree/braintree_php": "^3.26",
         "fideloper/proxy": "~3.3",
         "laracasts/presenter": "^0.2.1",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "netshell/paypal": "dev-master",
+        "rtconner/laravel-likeable": "~1.2",
+        "spatie/url-signer": "^1.0",
+        "srmklive/paypal": "~1.0",
         "zizaco/entrust": "^1.8"
     },
     "require-dev": {

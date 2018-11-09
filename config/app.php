@@ -168,6 +168,9 @@ return [
          * Package Service Providers...
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Conner\Likeable\LikeableServiceProvider::class,
+        Netshell\Paypal\PaypalServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,9 +229,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Socialize' => Laravel\Socialite\Facades\Socialite::class,
         // App Package Facades
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Paypal' => Netshell\Paypal\Facades\Paypal::class
 
     ],
 
